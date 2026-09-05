@@ -40,8 +40,9 @@ import {
     CounterLabel,
     DataTable,
     DatePicker,
-    Dialog,
     Details,
+    Dialog,
+    Drawer,
     Em,
     Flow,
     Frame,
@@ -153,8 +154,9 @@ const Router = () => (
                 <Route path="components/counter-label" element={<CounterLabel />} />
                 <Route path="components/data-table" element={<DataTable />} />
                 <Route path="components/date-picker" element={<DatePicker />} />
-                <Route path="components/dialog" element={<Dialog />} />
                 <Route path="components/details" element={<Details />} />
+                <Route path="components/dialog" element={<Dialog />} />
+                <Route path="components/drawer" element={<Drawer />} />
                 <Route path="components/em" element={<Em />} />
                 <Route path="components/flow" element={<Flow />} />
                 <Route path="components/frame" element={<Frame />} />
