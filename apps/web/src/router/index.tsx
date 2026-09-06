@@ -69,6 +69,7 @@ import {
     LayerCard,
     Link,
     List,
+    Map,
     Mark,
     Marquee,
     MCPServer,
@@ -195,6 +196,7 @@ const Router = () => (
                 <Route path="components/layer-card" element={<LayerCard />} />
                 <Route path="components/link" element={<Link />} />
                 <Route path="components/list" element={<List />} />
+                <Route path="components/map" element={<Map />} />
                 <Route path="components/mark" element={<Mark />} />
                 <Route path="components/marquee" element={<Marquee />} />
                 <Route path="components/native-select" element={<NativeSelect />} />

@@ -66,6 +66,7 @@ export { default as LabelGroup } from "./LabelGroup";
 export { default as LayerCard } from "./LayerCard";
 export { default as Link } from "./Link";
 export { default as List } from "./List";
+export { default as Map } from "./Map";
 export { default as Mark } from "./Mark";
 export { default as Marquee } from "./Marquee";
 export { default as NativeSelect } from "./NativeSelect";
