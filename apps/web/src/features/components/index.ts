@@ -50,6 +50,7 @@ export { default as FloatingPanel } from "./FloatingPanel";
 export { default as Flow } from "./Flow";
 export { default as FormatByte } from "./FormatByte";
 export { default as FormatNumber } from "./FormatNumber";
+export { default as FormControl } from "./FormControl";
 export { default as Frame } from "./Frame";
 export { default as Header } from "./Header";
 export { default as Heading } from "./Heading";

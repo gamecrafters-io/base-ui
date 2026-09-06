@@ -51,6 +51,7 @@ import {
     Flow,
     FormatByte,
     FormatNumber,
+    FormControl,
     Frame,
     Header,
     Heading,
@@ -171,6 +172,7 @@ const Router = () => (
                 <Route path="components/flow" element={<Flow />} />
                 <Route path="components/format-byte" element={<FormatByte />} />
                 <Route path="components/format-number" element={<FormatNumber />} />
+                <Route path="components/form-control" element={<FormControl />} />
                 <Route path="components/frame" element={<Frame />} />
                 <Route path="components/header" element={<Header />} />
                 <Route path="components/heading" element={<Heading />} />
