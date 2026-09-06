@@ -48,6 +48,7 @@ export { default as FileUpload } from "./FileUpload";
 export { default as FilteredActionList } from "./FilteredActionList";
 export { default as FloatingPanel } from "./FloatingPanel";
 export { default as Flow } from "./Flow";
+export { default as FormatByte } from "./FormatByte";
 export { default as Frame } from "./Frame";
 export { default as Header } from "./Header";
 export { default as Heading } from "./Heading";

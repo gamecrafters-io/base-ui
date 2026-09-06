@@ -49,6 +49,7 @@ import {
     FilteredActionList,
     FloatingPanel,
     Flow,
+    FormatByte,
     Frame,
     Header,
     Heading,
@@ -167,6 +168,7 @@ const Router = () => (
                 <Route path="components/filtered-action-list" element={<FilteredActionList />} />
                 <Route path="components/floating-panel" element={<FloatingPanel />} />
                 <Route path="components/flow" element={<Flow />} />
+                <Route path="components/format-byte" element={<FormatByte />} />
                 <Route path="components/frame" element={<Frame />} />
                 <Route path="components/header" element={<Header />} />
                 <Route path="components/heading" element={<Heading />} />
