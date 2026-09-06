@@ -43,6 +43,7 @@ export { default as Details } from "./Details";
 export { default as Dialog } from "./Dialog";
 export { default as Drawer } from "./Drawer";
 export { default as Em } from "./Em";
+export { default as EmptyState } from "./EmptyState";
 export { default as Flow } from "./Flow";
 export { default as Frame } from "./Frame";
 export { default as Header } from "./Header";
