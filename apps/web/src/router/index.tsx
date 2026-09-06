@@ -57,6 +57,7 @@ import {
     Heading,
     Highlight,
     Home,
+    HoverCard,
     IconButton,
     Image,
     Installation,
@@ -178,6 +179,7 @@ const Router = () => (
                 <Route path="components/header" element={<Header />} />
                 <Route path="components/heading" element={<Heading />} />
                 <Route path="components/highlight" element={<Highlight />} />
+                <Route path="components/hover-card" element={<HoverCard />} />
                 <Route path="components/icon-button" element={<IconButton />} />
                 <Route path="components/image" element={<Image />} />
                 <Route path="components/label" element={<Label />} />
