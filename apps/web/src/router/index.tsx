@@ -60,6 +60,7 @@ import {
     HoverCard,
     IconButton,
     Image,
+    InlineMessage,
     Installation,
     Label,
     Link,
@@ -182,6 +183,7 @@ const Router = () => (
                 <Route path="components/hover-card" element={<HoverCard />} />
                 <Route path="components/icon-button" element={<IconButton />} />
                 <Route path="components/image" element={<Image />} />
+                <Route path="components/inline-message" element={<InlineMessage />} />
                 <Route path="components/label" element={<Label />} />
                 <Route path="components/link" element={<Link />} />
                 <Route path="components/list" element={<List />} />

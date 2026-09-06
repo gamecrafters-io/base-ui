@@ -58,6 +58,7 @@ export { default as Highlight } from "./Highlight";
 export { default as HoverCard } from "./HoverCard";
 export { default as IconButton } from "./IconButton";
 export { default as Image } from "./Image";
+export { default as InlineMessage } from "./InlineMessage";
 export { default as Label } from "./Label";
 export { default as Link } from "./Link";
 export { default as List } from "./List";
