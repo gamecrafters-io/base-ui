@@ -54,6 +54,7 @@ export { default as FormControl } from "./FormControl";
 export { default as Frame } from "./Frame";
 export { default as Header } from "./Header";
 export { default as Heading } from "./Heading";
+export { default as Highlight } from "./Highlight";
 export { default as IconButton } from "./IconButton";
 export { default as Image } from "./Image";
 export { default as Label } from "./Label";

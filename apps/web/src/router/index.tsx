@@ -55,6 +55,7 @@ import {
     Frame,
     Header,
     Heading,
+    Highlight,
     Home,
     IconButton,
     Image,
@@ -176,6 +177,7 @@ const Router = () => (
                 <Route path="components/frame" element={<Frame />} />
                 <Route path="components/header" element={<Header />} />
                 <Route path="components/heading" element={<Heading />} />
+                <Route path="components/highlight" element={<Highlight />} />
                 <Route path="components/icon-button" element={<IconButton />} />
                 <Route path="components/image" element={<Image />} />
                 <Route path="components/label" element={<Label />} />
