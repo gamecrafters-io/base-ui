@@ -71,6 +71,7 @@ export { default as Mark } from "./Mark";
 export { default as Markdown } from "./Markdown";
 export { default as Marquee } from "./Marquee";
 export { default as Message } from "./Message";
+export { default as Meter } from "./Meter";
 export { default as NativeSelect } from "./NativeSelect";
 export { default as Placeholder } from "./Placeholder";
 export { default as Radio } from "./Radio";

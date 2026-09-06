@@ -75,6 +75,7 @@ import {
     Marquee,
     MCPServer,
     Message,
+    Meter,
     NativeSelect,
     NotFound,
     Placeholder,
@@ -203,6 +204,7 @@ const Router = () => (
                 <Route path="components/markdown" element={<Markdown />} />
                 <Route path="components/marquee" element={<Marquee />} />
                 <Route path="components/message" element={<Message />} />
+                <Route path="components/meter" element={<Meter />} />
                 <Route path="components/native-select" element={<NativeSelect />} />
                 <Route path="components/placeholder" element={<Placeholder />} />
                 <Route path="components/radio" element={<Radio />} />
