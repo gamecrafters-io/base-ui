@@ -85,6 +85,7 @@ import {
     PINInput,
     Placeholder,
     Popover,
+    Portal,
     PrimitivesColor,
     PrimitivesSize,
     PrimitivesTypography,
@@ -219,6 +220,7 @@ const Router = () => (
                 <Route path="components/pin-input" element={<PINInput />} />
                 <Route path="components/placeholder" element={<Placeholder />} />
                 <Route path="components/popover" element={<Popover />} />
+                <Route path="components/portal" element={<Portal />} />
                 <Route path="components/radio" element={<Radio />} />
                 <Route path="components/rating" element={<Rating />} />
                 <Route path="components/resizable" element={<Resizable />} />

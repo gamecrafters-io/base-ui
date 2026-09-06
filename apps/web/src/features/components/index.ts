@@ -80,6 +80,7 @@ export { default as PasswordInput } from "./PasswordInput";
 export { default as PINInput } from "./PINInput";
 export { default as Placeholder } from "./Placeholder";
 export { default as Popover } from "./Popover";
+export { default as Portal } from "./Portal";
 export { default as Radio } from "./Radio";
 export { default as Rating } from "./Rating";
 export { default as Resizable } from "./Resizable";
