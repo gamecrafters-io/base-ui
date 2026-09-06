@@ -74,6 +74,7 @@ export { default as Message } from "./Message";
 export { default as Meter } from "./Meter";
 export { default as NativeSelect } from "./NativeSelect";
 export { default as NumberInput } from "./NumberInput";
+export { default as PageLayout } from "./PageLayout";
 export { default as Placeholder } from "./Placeholder";
 export { default as Radio } from "./Radio";
 export { default as Rating } from "./Rating";

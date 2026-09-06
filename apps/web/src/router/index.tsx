@@ -79,6 +79,7 @@ import {
     NativeSelect,
     NotFound,
     NumberInput,
+    PageLayout,
     Placeholder,
     PrimitivesColor,
     PrimitivesSize,
@@ -208,6 +209,7 @@ const Router = () => (
                 <Route path="components/meter" element={<Meter />} />
                 <Route path="components/native-select" element={<NativeSelect />} />
                 <Route path="components/number-input" element={<NumberInput />} />
+                <Route path="components/page-layout" element={<PageLayout />} />
                 <Route path="components/placeholder" element={<Placeholder />} />
                 <Route path="components/radio" element={<Radio />} />
                 <Route path="components/rating" element={<Rating />} />
