@@ -77,6 +77,7 @@ export { default as NumberInput } from "./NumberInput";
 export { default as PageLayout } from "./PageLayout";
 export { default as Pagination } from "./Pagination";
 export { default as PasswordInput } from "./PasswordInput";
+export { default as PINInput } from "./PINInput";
 export { default as Placeholder } from "./Placeholder";
 export { default as Radio } from "./Radio";
 export { default as Rating } from "./Rating";

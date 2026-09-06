@@ -82,6 +82,7 @@ import {
     PageLayout,
     Pagination,
     PasswordInput,
+    PINInput,
     Placeholder,
     PrimitivesColor,
     PrimitivesSize,
@@ -214,6 +215,7 @@ const Router = () => (
                 <Route path="components/page-layout" element={<PageLayout />} />
                 <Route path="components/pagination" element={<Pagination />} />
                 <Route path="components/password-input" element={<PasswordInput />} />
+                <Route path="components/pin-input" element={<PINInput />} />
                 <Route path="components/placeholder" element={<Placeholder />} />
                 <Route path="components/radio" element={<Radio />} />
                 <Route path="components/rating" element={<Rating />} />
