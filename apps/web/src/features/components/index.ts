@@ -62,6 +62,7 @@ export { default as InlineMessage } from "./InlineMessage";
 export { default as JSONTreeView } from "./JSONTreeView";
 export { default as KeybindingHint } from "./KeybindingHint";
 export { default as Label } from "./Label";
+export { default as LabelGroup } from "./LabelGroup";
 export { default as Link } from "./Link";
 export { default as List } from "./List";
 export { default as Mark } from "./Mark";

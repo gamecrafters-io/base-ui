@@ -65,6 +65,7 @@ import {
     JSONTreeView,
     KeybindingHint,
     Label,
+    LabelGroup,
     Link,
     List,
     Mark,
@@ -189,6 +190,7 @@ const Router = () => (
                 <Route path="components/json-tree-view" element={<JSONTreeView />} />
                 <Route path="components/keybinding-hint" element={<KeybindingHint />} />
                 <Route path="components/label" element={<Label />} />
+                <Route path="components/label-group" element={<LabelGroup />} />
                 <Route path="components/link" element={<Link />} />
                 <Route path="components/list" element={<List />} />
                 <Route path="components/mark" element={<Mark />} />
