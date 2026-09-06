@@ -62,6 +62,7 @@ import {
     Image,
     InlineMessage,
     Installation,
+    JSONTreeView,
     Label,
     Link,
     List,
@@ -184,6 +185,7 @@ const Router = () => (
                 <Route path="components/icon-button" element={<IconButton />} />
                 <Route path="components/image" element={<Image />} />
                 <Route path="components/inline-message" element={<InlineMessage />} />
+                <Route path="components/json-tree-view" element={<JSONTreeView />} />
                 <Route path="components/label" element={<Label />} />
                 <Route path="components/link" element={<Link />} />
                 <Route path="components/list" element={<List />} />
