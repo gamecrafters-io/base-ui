@@ -46,6 +46,7 @@ export { default as Em } from "./Em";
 export { default as EmptyState } from "./EmptyState";
 export { default as FileUpload } from "./FileUpload";
 export { default as FilteredActionList } from "./FilteredActionList";
+export { default as FloatingPanel } from "./FloatingPanel";
 export { default as Flow } from "./Flow";
 export { default as Frame } from "./Frame";
 export { default as Header } from "./Header";
