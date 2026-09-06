@@ -45,6 +45,7 @@ import {
     Drawer,
     Em,
     EmptyState,
+    FileUpload,
     Flow,
     Frame,
     Header,
@@ -160,6 +161,7 @@ const Router = () => (
                 <Route path="components/drawer" element={<Drawer />} />
                 <Route path="components/em" element={<Em />} />
                 <Route path="components/empty-state" element={<EmptyState />} />
+                <Route path="components/file-upload" element={<FileUpload />} />
                 <Route path="components/flow" element={<Flow />} />
                 <Route path="components/frame" element={<Frame />} />
                 <Route path="components/header" element={<Header />} />
