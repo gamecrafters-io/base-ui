@@ -46,6 +46,7 @@ import {
     Em,
     EmptyState,
     FileUpload,
+    FilteredActionList,
     Flow,
     Frame,
     Header,
@@ -162,6 +163,7 @@ const Router = () => (
                 <Route path="components/em" element={<Em />} />
                 <Route path="components/empty-state" element={<EmptyState />} />
                 <Route path="components/file-upload" element={<FileUpload />} />
+                <Route path="components/filtered-action-list" element={<FilteredActionList />} />
                 <Route path="components/flow" element={<Flow />} />
                 <Route path="components/frame" element={<Frame />} />
                 <Route path="components/header" element={<Header />} />
