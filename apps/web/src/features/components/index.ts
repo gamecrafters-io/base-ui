@@ -68,6 +68,7 @@ export { default as Link } from "./Link";
 export { default as List } from "./List";
 export { default as Map } from "./Map";
 export { default as Mark } from "./Mark";
+export { default as Markdown } from "./Markdown";
 export { default as Marquee } from "./Marquee";
 export { default as NativeSelect } from "./NativeSelect";
 export { default as Placeholder } from "./Placeholder";
