@@ -110,6 +110,7 @@ import {
     Strong,
     Swap,
     Switch,
+    Tabs,
     Text,
     Textarea,
     Timer,
@@ -249,6 +250,7 @@ const Router = () => (
                 <Route path="components/strong" element={<Strong />} />
                 <Route path="components/swap" element={<Swap />} />
                 <Route path="components/switch" element={<Switch />} />
+                <Route path="components/tabs" element={<Tabs />} />
                 <Route path="components/text" element={<Text />} />
                 <Route path="components/textarea" element={<Textarea />} />
                 <Route path="components/timer" element={<Timer />} />
