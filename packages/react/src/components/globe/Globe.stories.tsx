@@ -8,23 +8,45 @@ const classes = {
     frame: "w-[32rem] max-w-full",
 };
 
-const MARKERS = [
-    { id: "sf", location: [37.78, -122.44] as [number, number] },
-    { id: "nyc", location: [40.71, -74.01] as [number, number] },
-    { id: "london", location: [51.51, -0.13] as [number, number] },
-    { id: "tokyo", location: [35.68, 139.65] as [number, number] },
+// The airports the routes below run between, which is what the markers stand for here
+const AIRPORTS = [
+    { id: "jfk", location: [40.64, -73.78] as [number, number] },
+    { id: "lhr", location: [51.47, -0.46] as [number, number] },
+    { id: "dxb", location: [25.25, 55.36] as [number, number] },
+    { id: "nrt", location: [35.55, 139.78] as [number, number] },
+    { id: "sfo", location: [37.62, -122.38] as [number, number] },
+    { id: "sin", location: [1.36, 103.99] as [number, number] },
+    { id: "syd", location: [-33.95, 151.18] as [number, number] },
+    { id: "cdg", location: [48.86, 2.35] as [number, number] },
 ];
 
-const ARCS = [
+// The routes flown between them. Each is named, which is what would give it an anchor at its
+// highest point for anything the page wanted to hold over it
+const FLIGHTS = [
     {
-        id: "sf-tokyo",
-        from: [37.78, -122.44] as [number, number],
-        to: [35.68, 139.65] as [number, number],
+        id: "jfk-lhr",
+        from: [40.64, -73.78] as [number, number],
+        to: [51.47, -0.46] as [number, number],
     },
     {
-        id: "nyc-london",
-        from: [40.71, -74.01] as [number, number],
-        to: [51.51, -0.13] as [number, number],
+        id: "lhr-dxb",
+        from: [51.47, -0.46] as [number, number],
+        to: [25.25, 55.36] as [number, number],
+    },
+    {
+        id: "nrt-sfo",
+        from: [35.55, 139.78] as [number, number],
+        to: [37.62, -122.38] as [number, number],
+    },
+    {
+        id: "sin-syd",
+        from: [1.36, 103.99] as [number, number],
+        to: [-33.95, 151.18] as [number, number],
+    },
+    {
+        id: "cdg-jfk",
+        from: [48.86, 2.35] as [number, number],
+        to: [40.64, -73.78] as [number, number],
     },
 ];
 
@@ -35,10 +57,13 @@ export default {
 
 export const Default: StoryFn<typeof Globe> = () => (
     <div className={classes.frame}>
-        <Globe markers={MARKERS} />
+        <Globe />
     </div>
 );
 
+// Traffic between airports: a marker at every one of them, and a route drawn between the pairs
+// that are flown. The markers are drawn small, since what says where a route ends here is the arc
+// rather than the dot beneath it
 export const Playground: StoryFn<GlobeProps> = (args) => (
     <div className={classes.frame}>
         <Globe {...args} />
@@ -49,11 +74,15 @@ Playground.args = {
     latitude: 37.78,
     longitude: -122.44,
     size: 512,
-    markers: MARKERS,
-    arcs: ARCS,
-    markerSize: 0.05,
+    markers: AIRPORTS,
+    arcs: FLIGHTS,
+    markerSize: 0.02,
     spin: true,
-    speed: 0.3,
+    // The rate the traffic is turned past at: a slow, steady turn taking a little over half a
+    // minute to come round. It is written against the clock rather than against the frame, so it
+    // is the same turn on a screen drawing thirty frames a second as on one drawing a hundred and
+    // twenty
+    speed: 0.18,
     interactive: true,
 };
 
@@ -105,7 +134,7 @@ Playground.argTypes = {
             type: "number",
             min: 0.05,
             max: 2,
-            step: 0.05,
+            step: 0.01,
         },
         description: "How fast a spinning globe turns, in radians a second",
     },
