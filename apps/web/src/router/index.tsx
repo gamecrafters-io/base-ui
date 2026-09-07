@@ -94,6 +94,7 @@ import {
     ProgressCircle,
     QRCode,
     Radio,
+    RadioCard,
     Rating,
     Resizable,
     Separator,
@@ -230,6 +231,7 @@ const Router = () => (
                 <Route path="components/progress-circle" element={<ProgressCircle />} />
                 <Route path="components/qr-code" element={<QRCode />} />
                 <Route path="components/radio" element={<Radio />} />
+                <Route path="components/radio-card" element={<RadioCard />} />
                 <Route path="components/rating" element={<Rating />} />
                 <Route path="components/resizable" element={<Resizable />} />
                 <Route path="components/separator" element={<Separator />} />

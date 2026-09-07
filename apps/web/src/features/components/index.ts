@@ -86,6 +86,7 @@ export { default as ProgressBar } from "./ProgressBar";
 export { default as ProgressCircle } from "./ProgressCircle";
 export { default as QRCode } from "./QRCode";
 export { default as Radio } from "./Radio";
+export { default as RadioCard } from "./RadioCard";
 export { default as Rating } from "./Rating";
 export { default as Resizable } from "./Resizable";
 export { default as Separator } from "./Separator";
