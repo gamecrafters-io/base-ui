@@ -1,0 +1,93 @@
+@layer components {
+    /* A dotted globe drawn with WebGL, standing in a box of its own.
+
+       Everything the globe is drawn from comes through custom properties, as the flow's lines and
+       the code block's ground do, so a caller can repaint a globe without having to unpick the
+       classes it came with. They are read off this element by the component and handed to the
+       shader, which is why each of them is a number rather than a colour: a shader is given three
+       numbers between nought and one where a stylesheet would be given a token.
+
+       That is also what puts the two themes on the same footing. A globe is not drawn from the
+       page's tokens directly, since none of them is written in the form a shader can read, so the
+       scheme it follows is written out here once for each theme.
+
+       The width is the one measurement a globe cannot work out for itself: it is drawn to whatever
+       room it is given, and given none it would be drawn to nothing at all. The height is not
+       asked for at all, since a globe is round */
+    .globe {
+        --globe-size: 100%;
+
+        /* White, so the sea reads as the page and the land as what is dotted onto it */
+        --globe-base-color: 1 1 1;
+        /* The halo around the edge, and the light gathering along the rim inside it */
+        --globe-glow-color: 1 1 1;
+        /* #0969da, which is what --background-color-accent-emphasis is drawn from in this scheme.
+           It is written out rather than referred to because the token is a colour and this is
+           three numbers, so the one cannot be built from the other */
+        --globe-marker-color: 0.035 0.412 0.855;
+        --globe-arc-color: 0.035 0.412 0.855;
+
+        /* How many dots the land is drawn from. More reads as finer at the GPU's cost, and this is
+           about where the coastlines start to be worth the difference */
+        --globe-map-samples: 16000;
+        /* How brightly the dots on land are drawn, and how brightly the sea between them is */
+        --globe-map-brightness: 6;
+        --globe-map-base-brightness: 0;
+        /* Nought draws the land dark on a light globe, and one draws it light on a dark one */
+        --globe-dark: 0;
+        /* How sharply the light falls off towards the edge */
+        --globe-diffuse: 1.2;
+        --globe-opacity: 1;
+        /* How far the markers, and the ends of the arcs, stand off the surface */
+        --globe-marker-elevation: 0.01;
+        /* How high an arc rises between its two ends, and how thick it is drawn */
+        --globe-arc-height: 0.25;
+        --globe-arc-width: 0.5;
+
+        position: relative;
+        width: var(--globe-size);
+        /* A globe given a width wider than the room it has is brought down to fit rather than
+           running past the edge of what it stands in */
+        max-width: 100%;
+        /* Round, so one measurement settles both */
+        aspect-ratio: 1;
+
+        /* A globe that can be turned takes focus, so it has to show that it has it */
+        &:focus-visible {
+            outline: var(--focus-outline-width) solid var(--focus-outline-color);
+            outline-offset: var(--focus-outline-offset);
+        }
+
+        /* The land is dotted light on dark, and the globe itself is painted well clear of the
+           page behind it: a globe drawn in the colour of the surface it stands on would have
+           nothing but its own glow to be told apart by */
+        [data-theme="dark"] & {
+            --globe-base-color: 0.22 0.24 0.28;
+            --globe-glow-color: 0.08 0.09 0.11;
+            /* #4493f8, the accent this scheme draws with */
+            --globe-marker-color: 0.267 0.576 0.973;
+            --globe-arc-color: 0.267 0.576 0.973;
+            --globe-dark: 1;
+        }
+    }
+
+    /* A globe that can be turned by hand says so with the pointer, and takes the dragging for
+       itself: a hand travelling across a globe on a telephone is turning it rather than scrolling
+       the page past it, and is not selecting whatever is written over it either */
+    .globe[data-interactive] {
+        cursor: grab;
+        touch-action: none;
+        user-select: none;
+
+        &:active {
+            cursor: grabbing;
+        }
+    }
+
+    /* Where the globe itself draws. The component sizes the box above and the surface fills it,
+       rather than each being given a size of its own to disagree with the other */
+    .globe-surface {
+        width: 100%;
+        height: 100%;
+    }
+}

@@ -1,0 +1,160 @@
+// The globe itself, drawn across the whole canvas as two triangles and shaded a pixel at a time.
+//
+// Every pixel inside the outline is turned back into the point on the sphere it looks at, that
+// point is turned the opposite way from the globe, and the nearest of the dots the land is drawn
+// from is found. The dots are laid out on a spherical Fibonacci lattice, which spreads any number
+// of them evenly over a sphere and, more to the point, lets the nearest one to a point be found
+// by arithmetic rather than by searching. The dot is lit where the land map says there is land,
+// and the whole is lit by a light from the viewer that falls off towards the edge, with a glow
+// drawn around and just inside the outline.
+//
+// Written against GLSL ES 1.00, which WebGL 2 reads as readily as WebGL 1 does
+
+export const GLOBE_VERTEX_SHADER = `
+attribute vec2 aPosition;
+
+void main() {
+  gl_Position = vec4(aPosition, 0.0, 1.0);
+}
+`;
+
+export const GLOBE_FRAGMENT_SHADER = `
+precision highp float;
+
+uniform vec2 uResolution;
+uniform vec2 offset;
+uniform vec2 rotation;
+uniform float dots;
+uniform float scale;
+uniform vec3 baseColor;
+uniform vec3 glowColor;
+uniform vec4 renderParams;
+uniform float mapBaseBrightness;
+uniform sampler2D uTexture;
+
+const float sqrt5 = 2.236068;
+const float PI = 3.141593;
+const float kTau = 6.283185;
+const float kPhi = 1.618034;
+const float r = 0.8;
+
+float byDots;
+
+mat3 rotate(float theta, float phi) {
+  float cx = cos(theta);
+  float cy = cos(phi);
+  float sx = sin(theta);
+  float sy = sin(phi);
+  return mat3(
+    cy, sy * sx, -sy * cx,
+    0.0, cx, sx,
+    sy, cy * -sx, cy * cx
+  );
+}
+
+vec3 nearestFibonacciLattice(vec3 p, out float m) {
+  p = p.xzy;
+
+  float k = max(2.0, floor(log2(sqrt5 * dots * PI * (1.0 - p.z * p.z)) * 0.72021));
+
+  vec2 f = floor(pow(kPhi, k) / sqrt5 * vec2(1.0, kPhi) + 0.5);
+  vec2 br1 = fract((f + 1.0) * (kPhi - 1.0)) * kTau - 3.883222;
+  vec2 br2 = -2.0 * f;
+  vec2 sp = vec2(atan(p.y, p.x), p.z - 1.0);
+  vec2 c = floor(vec2(
+    br2.y * sp.x - br1.y * (sp.y * dots + 1.0),
+    -br2.x * sp.x + br1.x * (sp.y * dots + 1.0)
+  ) / (br1.x * br2.y - br2.x * br1.y));
+
+  float mindist = PI;
+  vec3 minip;
+  for (float s = 0.0; s < 4.0; s += 1.0) {
+    vec2 o = vec2(mod(s, 2.0), floor(s * 0.5));
+    float idx = dot(f, c + o);
+    if (idx > dots) continue;
+
+    float a = idx, b = 0.0;
+    if (a >= 16384.0) a -= 16384.0, b += 0.868872;
+    if (a >= 8192.0) a -= 8192.0, b += 0.934436;
+    if (a >= 4096.0) a -= 4096.0, b += 0.467218;
+    if (a >= 2048.0) a -= 2048.0, b += 0.733609;
+    if (a >= 1024.0) a -= 1024.0, b += 0.866804;
+    if (a >= 512.0) a -= 512.0, b += 0.433402;
+    if (a >= 256.0) a -= 256.0, b += 0.216701;
+    if (a >= 128.0) a -= 128.0, b += 0.108351;
+    if (a >= 64.0) a -= 64.0, b += 0.554175;
+    if (a >= 32.0) a -= 32.0, b += 0.777088;
+    if (a >= 16.0) a -= 16.0, b += 0.888544;
+    if (a >= 8.0) a -= 8.0, b += 0.944272;
+    if (a >= 4.0) a -= 4.0, b += 0.472136;
+    if (a >= 2.0) a -= 2.0, b += 0.236068;
+    if (a >= 1.0) a -= 1.0, b += 0.618034;
+
+    float theta = fract(b) * kTau;
+
+    float cosphi = 1.0 - 2.0 * idx * byDots;
+    float sinphi = sqrt(1.0 - cosphi * cosphi);
+    vec3 candidate = vec3(cos(theta) * sinphi, sin(theta) * sinphi, cosphi);
+
+    float dist = length(p - candidate);
+
+    if (dist < mindist) {
+      mindist = dist;
+      minip = candidate;
+    }
+  }
+
+  m = mindist;
+  return minip.xzy;
+}
+
+void main() {
+  byDots = 1.0 / dots;
+
+  vec2 invResolution = 1.0 / uResolution;
+
+  vec2 uv = ((gl_FragCoord.xy * invResolution) * 2.0 - 1.0) / scale
+    - offset * vec2(1.0, -1.0) * invResolution;
+  uv.x *= uResolution.x * invResolution.y;
+
+  float l = dot(uv, uv);
+  float glowFactor = 0.0;
+
+  vec4 color = vec4(0.0);
+
+  if (l <= r * r) {
+    float dis;
+    vec4 layer = vec4(0.0);
+    vec3 p = normalize(vec3(uv, sqrt(r * r - l)));
+    mat3 rot = rotate(rotation.y, rotation.x);
+    float dotNL = p.z;
+
+    vec3 gP = nearestFibonacciLattice(p * rot, dis);
+
+    float gPhi = asin(gP.y);
+    float gTheta = acos(-gP.x / cos(gPhi));
+    if (gP.z < 0.0) gTheta = -gTheta;
+
+    vec2 mapUV = vec2((gTheta * 0.5) / PI, -(gPhi / PI + 0.5));
+    float mapColor = max(texture2D(uTexture, mapUV).x, mapBaseBrightness);
+
+    float land = mapColor
+      * smoothstep(0.008, 0.0, dis)
+      * pow(dotNL, renderParams.y)
+      * renderParams.x;
+    layer += vec4(baseColor
+      * (mix((1.0 - land) * pow(dotNL, 0.4), land, renderParams.z) + 0.1)
+      + pow(1.0 - dotNL, 4.0) * glowColor
+    , 1.0);
+
+    color += layer * (1.0 + renderParams.w) * 0.5;
+
+    glowFactor = (1.0 - l) * (1.0 - l) * smoothstep(0.0, 1.0, 0.2 / (l - r * r));
+  } else {
+    float outD = sqrt(0.2 / (l - r * r));
+    glowFactor = smoothstep(0.5, 1.0, outD / (outD + 1.0));
+  }
+
+  gl_FragColor = color + vec4(glowFactor * glowColor, glowFactor);
+}
+`;

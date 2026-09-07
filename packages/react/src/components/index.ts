@@ -50,6 +50,7 @@ export * from "./form-control";
 export * from "./format-byte";
 export * from "./format-number";
 export * from "./frame";
+export * from "./globe";
 export * from "./header";
 export * from "./heading";
 export * from "./hidden";
