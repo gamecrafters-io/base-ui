@@ -98,6 +98,7 @@ import {
     RadioCard,
     RadioGroup,
     Rating,
+    RelativeTime,
     Resizable,
     Separator,
     SkeletonAvatar,
@@ -242,6 +243,7 @@ const Router = () => (
                 <Route path="components/radio-card" element={<RadioCard />} />
                 <Route path="components/radio-group" element={<RadioGroup />} />
                 <Route path="components/rating" element={<Rating />} />
+                <Route path="components/relative-time" element={<RelativeTime />} />
                 <Route path="components/resizable" element={<Resizable />} />
                 <Route path="components/separator" element={<Separator />} />
                 <Route path="components/skeleton-avatar" element={<SkeletonAvatar />} />

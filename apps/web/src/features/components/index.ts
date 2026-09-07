@@ -90,6 +90,7 @@ export { default as Radio } from "./Radio";
 export { default as RadioCard } from "./RadioCard";
 export { default as RadioGroup } from "./RadioGroup";
 export { default as Rating } from "./Rating";
+export { default as RelativeTime } from "./RelativeTime";
 export { default as Resizable } from "./Resizable";
 export { default as Separator } from "./Separator";
 export { default as SkeletonAvatar } from "./SkeletonAvatar";
