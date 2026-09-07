@@ -92,6 +92,7 @@ import {
     PrimitivesTypography,
     ProgressBar,
     ProgressCircle,
+    QRCode,
     Radio,
     Rating,
     Resizable,
@@ -227,6 +228,7 @@ const Router = () => (
                 <Route path="components/presence" element={<Presence />} />
                 <Route path="components/progress-bar" element={<ProgressBar />} />
                 <Route path="components/progress-circle" element={<ProgressCircle />} />
+                <Route path="components/qr-code" element={<QRCode />} />
                 <Route path="components/radio" element={<Radio />} />
                 <Route path="components/rating" element={<Rating />} />
                 <Route path="components/resizable" element={<Resizable />} />
