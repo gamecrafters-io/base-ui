@@ -96,6 +96,7 @@ import {
     QRCode,
     Radio,
     RadioCard,
+    RadioGroup,
     Rating,
     Resizable,
     Separator,
@@ -239,6 +240,7 @@ const Router = () => (
                 <Route path="components/qr-code" element={<QRCode />} />
                 <Route path="components/radio" element={<Radio />} />
                 <Route path="components/radio-card" element={<RadioCard />} />
+                <Route path="components/radio-group" element={<RadioGroup />} />
                 <Route path="components/rating" element={<Rating />} />
                 <Route path="components/resizable" element={<Resizable />} />
                 <Route path="components/separator" element={<Separator />} />
