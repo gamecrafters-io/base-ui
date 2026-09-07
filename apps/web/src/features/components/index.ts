@@ -52,6 +52,7 @@ export { default as FormatByte } from "./FormatByte";
 export { default as FormatNumber } from "./FormatNumber";
 export { default as FormControl } from "./FormControl";
 export { default as Frame } from "./Frame";
+export { default as Globe } from "./Globe";
 export { default as Header } from "./Header";
 export { default as Heading } from "./Heading";
 export { default as Highlight } from "./Highlight";

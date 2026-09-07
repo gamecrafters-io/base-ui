@@ -168,6 +168,7 @@ const sections: SidebarSection[] = [
             { label: "FormatNumber", href: "/components/format-number" },
             { label: "FormControl", href: "/components/form-control" },
             { label: "Frame", href: "/components/frame" },
+            { label: "Globe", href: "/components/globe" },
             { label: "Header", href: "/components/header" },
             { label: "Heading", href: "/components/heading" },
             { label: "Highlight", href: "/components/highlight" },

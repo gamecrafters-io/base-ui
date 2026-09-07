@@ -53,6 +53,7 @@ import {
     FormatNumber,
     FormControl,
     Frame,
+    Globe,
     Header,
     Heading,
     Highlight,
@@ -202,6 +203,7 @@ const Router = () => (
                 <Route path="components/format-number" element={<FormatNumber />} />
                 <Route path="components/form-control" element={<FormControl />} />
                 <Route path="components/frame" element={<Frame />} />
+                <Route path="components/globe" element={<Globe />} />
                 <Route path="components/header" element={<Header />} />
                 <Route path="components/heading" element={<Heading />} />
                 <Route path="components/highlight" element={<Highlight />} />
