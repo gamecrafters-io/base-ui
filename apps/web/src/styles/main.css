@@ -2,3 +2,31 @@
    drawn by is in the library's stylesheet, which is imported once at the root beside this one and
    arrives first, so a utility written here is free to say the last word */
 @import "tailwindcss";
+
+/* What content arrives and leaves with where the page has to bring an animation of its own. A
+   presence draws nothing and animates nothing itself: it says where its content stands, as
+   `data-state`, and holds that content on the page until whatever it leaves with has run — so a
+   page showing one off has to give it the animation it is waiting on. Keyframes cannot be declared
+   in a utility, which is why these are written here rather than beside the page that reaches for
+   them, and they are named for what they do rather than for that page.
+
+   The step is the one the scale keeps for a state changing rather than for something crossing the
+   viewport, since what is being animated is content appearing where it already stood */
+@theme static {
+    --animate-presence-in: presence-in var(--motion-transition-enter);
+    --animate-presence-out: presence-out var(--motion-transition-exit);
+
+    @keyframes presence-in {
+        from {
+            opacity: 0;
+            transform: scale(0.95);
+        }
+    }
+
+    @keyframes presence-out {
+        to {
+            opacity: 0;
+            transform: scale(0.95);
+        }
+    }
+}
