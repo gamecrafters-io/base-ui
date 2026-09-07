@@ -103,6 +103,7 @@ import {
     SkeletonText,
     Spinner,
     Stack,
+    StatisticCard,
     Status,
     Storybook,
     Strong,
@@ -240,6 +241,7 @@ const Router = () => (
                 <Route path="components/skeleton-text" element={<SkeletonText />} />
                 <Route path="components/spinner" element={<Spinner />} />
                 <Route path="components/stack" element={<Stack />} />
+                <Route path="components/statistic-card" element={<StatisticCard />} />
                 <Route path="components/status" element={<Status />} />
                 <Route path="components/strong" element={<Strong />} />
                 <Route path="components/swap" element={<Swap />} />

@@ -95,6 +95,7 @@ export { default as SkeletonBox } from "./SkeletonBox";
 export { default as SkeletonText } from "./SkeletonText";
 export { default as Spinner } from "./Spinner";
 export { default as Stack } from "./Stack";
+export { default as StatisticCard } from "./StatisticCard";
 export { default as Status } from "./Status";
 export { default as Strong } from "./Strong";
 export { default as Swap } from "./Swap";
