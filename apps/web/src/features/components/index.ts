@@ -93,6 +93,7 @@ export { default as Separator } from "./Separator";
 export { default as SkeletonAvatar } from "./SkeletonAvatar";
 export { default as SkeletonBox } from "./SkeletonBox";
 export { default as SkeletonText } from "./SkeletonText";
+export { default as Slider } from "./Slider";
 export { default as Spinner } from "./Spinner";
 export { default as Stack } from "./Stack";
 export { default as StateLabel } from "./StateLabel";
