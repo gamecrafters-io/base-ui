@@ -118,6 +118,7 @@ import {
     Text,
     Textarea,
     Timer,
+    Toast,
     Token,
     TopicTag,
     TreeView,
@@ -263,6 +264,7 @@ const Router = () => (
                 <Route path="components/text" element={<Text />} />
                 <Route path="components/textarea" element={<Textarea />} />
                 <Route path="components/timer" element={<Timer />} />
+                <Route path="components/toast" element={<Toast />} />
                 <Route path="components/token" element={<Token />} />
                 <Route path="components/topic-tag" element={<TopicTag />} />
                 <Route path="components/tree-view" element={<TreeView />} />
