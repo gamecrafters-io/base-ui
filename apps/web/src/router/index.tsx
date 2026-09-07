@@ -100,6 +100,7 @@ import {
     Rating,
     RelativeTime,
     Resizable,
+    Select,
     Separator,
     SkeletonAvatar,
     SkeletonBox,
@@ -248,6 +249,7 @@ const Router = () => (
                 <Route path="components/rating" element={<Rating />} />
                 <Route path="components/relative-time" element={<RelativeTime />} />
                 <Route path="components/resizable" element={<Resizable />} />
+                <Route path="components/select" element={<Select />} />
                 <Route path="components/separator" element={<Separator />} />
                 <Route path="components/skeleton-avatar" element={<SkeletonAvatar />} />
                 <Route path="components/skeleton-box" element={<SkeletonBox />} />
