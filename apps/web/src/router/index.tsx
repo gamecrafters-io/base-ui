@@ -120,6 +120,7 @@ import {
     Timer,
     Toast,
     Token,
+    Tooltip,
     TopicTag,
     TreeView,
 } from "../features";
@@ -266,6 +267,7 @@ const Router = () => (
                 <Route path="components/timer" element={<Timer />} />
                 <Route path="components/toast" element={<Toast />} />
                 <Route path="components/token" element={<Token />} />
+                <Route path="components/tooltip" element={<Tooltip />} />
                 <Route path="components/topic-tag" element={<TopicTag />} />
                 <Route path="components/tree-view" element={<TreeView />} />
                 {/* The Storybook is read at the path itself and nowhere under it: what stands

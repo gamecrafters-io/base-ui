@@ -111,5 +111,6 @@ export { default as Textarea } from "./Textarea";
 export { default as Timer } from "./Timer";
 export { default as Toast } from "./Toast";
 export { default as Token } from "./Token";
+export { default as Tooltip } from "./Tooltip";
 export { default as TopicTag } from "./TopicTag";
 export { default as TreeView } from "./TreeView";
