@@ -118,6 +118,7 @@ import {
     Tabs,
     Text,
     Textarea,
+    TextInput,
     Timer,
     Toast,
     Token,
@@ -266,6 +267,7 @@ const Router = () => (
                 <Route path="components/tabs" element={<Tabs />} />
                 <Route path="components/text" element={<Text />} />
                 <Route path="components/textarea" element={<Textarea />} />
+                <Route path="components/text-input" element={<TextInput />} />
                 <Route path="components/timer" element={<Timer />} />
                 <Route path="components/toast" element={<Toast />} />
                 <Route path="components/token" element={<Token />} />
