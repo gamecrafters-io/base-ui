@@ -30,7 +30,13 @@ const classes = {
 };
 
 // A heading of the made-up document the examples are read against: what the contents are drawn
-// from, what it is called, and how much stands under it before the next one
+// from, what it is called, and how much stands under it before the next one.
+//
+// What stands under the first heading is written long enough to carry the second one clear of the
+// band a heading is read as arrived at within. An opening section shorter than that leaves both
+// headings standing in the band before the reader has scrolled at all, and an example that opens
+// with two lines already drawn as reached reads as the contents having lost count rather than as
+// two headings genuinely being on screen together
 type Section = TableOfContentsItemData & {
     label: string;
     lines: number;
@@ -94,7 +100,7 @@ const defaultSections: Section[] = [
 ];
 
 const nestedSections: Section[] = [
-    { value: "nested-importance", depth: 2, label: "Importance", lines: 6 },
+    { value: "nested-importance", depth: 2, label: "Importance", lines: 8 },
     { value: "nested-integrations", depth: 2, label: "Integrations", lines: 7 },
     { value: "nested-free-blocks", depth: 3, label: "Free blocks", lines: 5 },
     { value: "nested-configuration", depth: 3, label: "Configuration", lines: 8 },
@@ -105,7 +111,7 @@ const nestedSections: Section[] = [
 ];
 
 const placementSections: Section[] = [
-    { value: "placement-overview", depth: 2, label: "Overview", lines: 6 },
+    { value: "placement-overview", depth: 2, label: "Overview", lines: 8 },
     { value: "placement-installation", depth: 2, label: "Installation", lines: 5 },
     { value: "placement-usage", depth: 2, label: "Usage", lines: 9 },
     { value: "placement-api-reference", depth: 2, label: "API reference", lines: 7 },
