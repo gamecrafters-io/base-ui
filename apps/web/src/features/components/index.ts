@@ -95,6 +95,7 @@ export { default as Resizable } from "./Resizable";
 export { default as ScrollableRegion } from "./ScrollableRegion";
 export { default as SegmentedControl } from "./SegmentedControl";
 export { default as Select } from "./Select";
+export { default as SelectPanel } from "./SelectPanel";
 export { default as Separator } from "./Separator";
 export { default as SkeletonAvatar } from "./SkeletonAvatar";
 export { default as SkeletonBox } from "./SkeletonBox";

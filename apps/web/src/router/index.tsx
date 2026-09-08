@@ -103,6 +103,7 @@ import {
     ScrollableRegion,
     SegmentedControl,
     Select,
+    SelectPanel,
     Separator,
     SkeletonAvatar,
     SkeletonBox,
@@ -255,6 +256,7 @@ const Router = () => (
                 <Route path="components/scrollable-region" element={<ScrollableRegion />} />
                 <Route path="components/segmented-control" element={<SegmentedControl />} />
                 <Route path="components/select" element={<Select />} />
+                <Route path="components/select-panel" element={<SelectPanel />} />
                 <Route path="components/separator" element={<Separator />} />
                 <Route path="components/skeleton-avatar" element={<SkeletonAvatar />} />
                 <Route path="components/skeleton-box" element={<SkeletonBox />} />
