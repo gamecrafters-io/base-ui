@@ -5,6 +5,7 @@ import {
     HomeFooter,
     HomeFrameworks,
     HomeHero,
+    HomeShowcase,
     HomeSponsors,
 } from "./components";
 
@@ -23,7 +24,10 @@ const classes = {
 //
 // It is read down in one pass rather than looked up, so it is written as sections in the order a
 // reader would come to them: what the library is, what its components are like to use, how far it
-// has got, who pays for it, who writes it, and last of all where it can be built. The first two of
+// has got, what gets built with it, who pays for it, who writes it, and last of all where it can be
+// built. What comes out of the library is put after how far it has got and before the people, since
+// a reader who has been told what it is and that it is used is asking what it is used for next. The
+// first two of
 // those are the opening's, since the claim and the components backing it are read as the one pass
 // and are made together rather than a section apart; it hands them over loose, as the two boxes
 // they are read as. The foot of the page stands under all of them, since what it holds is where the
@@ -35,6 +39,7 @@ const Home = () => (
     <Stack className={classes.page} paddingBlock="spacious">
         <HomeHero />
         <HomeFigures />
+        <HomeShowcase />
         <HomeSponsors />
         <HomeContributors />
         <HomeFrameworks />
