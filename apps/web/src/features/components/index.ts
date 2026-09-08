@@ -114,6 +114,7 @@ export { default as Tabs } from "./Tabs";
 export { default as Text } from "./Text";
 export { default as Textarea } from "./Textarea";
 export { default as TextInput } from "./TextInput";
+export { default as Timeline } from "./Timeline";
 export { default as Timer } from "./Timer";
 export { default as Toast } from "./Toast";
 export { default as Token } from "./Token";
