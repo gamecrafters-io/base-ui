@@ -114,6 +114,7 @@ import {
     StateLabel,
     StatisticCard,
     Status,
+    Steps,
     Storybook,
     Strong,
     Swap,
@@ -267,6 +268,7 @@ const Router = () => (
                 <Route path="components/state-label" element={<StateLabel />} />
                 <Route path="components/statistic-card" element={<StatisticCard />} />
                 <Route path="components/status" element={<Status />} />
+                <Route path="components/steps" element={<Steps />} />
                 <Route path="components/strong" element={<Strong />} />
                 <Route path="components/swap" element={<Swap />} />
                 <Route path="components/switch" element={<Switch />} />

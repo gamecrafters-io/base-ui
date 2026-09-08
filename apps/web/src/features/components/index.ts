@@ -106,6 +106,7 @@ export { default as Stack } from "./Stack";
 export { default as StateLabel } from "./StateLabel";
 export { default as StatisticCard } from "./StatisticCard";
 export { default as Status } from "./Status";
+export { default as Steps } from "./Steps";
 export { default as Strong } from "./Strong";
 export { default as Swap } from "./Swap";
 export { default as Switch } from "./Switch";
