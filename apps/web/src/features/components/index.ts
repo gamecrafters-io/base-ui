@@ -110,6 +110,7 @@ export { default as Steps } from "./Steps";
 export { default as Strong } from "./Strong";
 export { default as Swap } from "./Swap";
 export { default as Switch } from "./Switch";
+export { default as TableOfContents } from "./TableOfContents";
 export { default as Tabs } from "./Tabs";
 export { default as Text } from "./Text";
 export { default as Textarea } from "./Textarea";
