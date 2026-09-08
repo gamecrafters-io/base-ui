@@ -131,6 +131,7 @@ import {
     Token,
     Tooltip,
     TopicTag,
+    Tour,
     TreeView,
 } from "../features";
 
@@ -287,6 +288,7 @@ const Router = () => (
                 <Route path="components/token" element={<Token />} />
                 <Route path="components/tooltip" element={<Tooltip />} />
                 <Route path="components/topic-tag" element={<TopicTag />} />
+                <Route path="components/tour" element={<Tour />} />
                 <Route path="components/tree-view" element={<TreeView />} />
                 {/* The Storybook is read at the path itself and nowhere under it: what stands
                     under it in a build is the Storybook's own files, answered as files before
