@@ -1,5 +1,5 @@
 import type { CSSProperties } from "react";
-import { Link } from "react-router";
+import { Link, useLocation } from "react-router";
 import {
     GithubRegular,
     NavigationRegular,
@@ -29,6 +29,10 @@ const classes = {
     // read hard against the name. It is held to the far end of that room instead, where it comes
     // to rest beside the controls the row ends on rather than out on its own in the middle
     menu: "justify-end",
+    // The links stand along the row rather than one under the other. Each of them is drawn as a
+    // box of its own and would otherwise be laid out as a block, so the menu lays them out itself,
+    // and it sets them apart by the room the row already sets between everything standing in it
+    menuLinks: "flex items-center gap-[var(--base-size-16)]",
     // The row ends where the page does, so the last item is not held off the end
     lastItem: "me-0",
     // What opens the column of links stands only where the column itself does not. The measure
@@ -47,10 +51,15 @@ const colors = {
     "--header-foreground-color-default": "var(--foreground-color-default)",
 } as CSSProperties;
 
-// Where the menu leads into the library: the page naming the one thing that has to be done before
-// any of it can be used, which is also what the column of links opens on. A reader arrives at the
-// same place whichever of the two they came by
-const docsHref = "/overview/installation";
+// Where the menu leads, in the order a reader asks for it. The library comes first, opened at the
+// page naming the one thing that has to be done before any of it can be used, which is also what
+// the column of links opens on: a reader arrives at the same place whichever of the two they came
+// by. What has been built with the library comes after, since it is what is asked about once there
+// is an answer to what the library is
+const menuLinks = [
+    { label: "Docs", href: "/overview/installation" },
+    { label: "Showcase", href: "/showcase" },
+];
 
 // Where the library itself is kept, which is somewhere else entirely rather than another page of
 // the site, so it is written out in full and opened away from whatever was being read
@@ -75,6 +84,7 @@ const Header = ({
     onOpenNavigation?: () => void;
 }) => {
     const { colorScheme, setColorMode } = useTheme();
+    const { pathname } = useLocation();
     const isNight = colorScheme === "dark";
 
     return (
@@ -116,16 +126,29 @@ const Header = ({
                             rather than in the middle of it, so the way into the library is come
                             upon where a reader is already looking for what the row can be asked
                             for */}
-                        <nav aria-label="Main">
-                            {/* Followed by the router, the way the name of the site beside it
-                                and the links beside a page are */}
-                            <BaseHeader.Link as={Link} to={docsHref}>
-                                {/* The weight is said rather than left to the link to pass
-                                    down, since the row's link is written to carry the name of
-                                    the site and would otherwise draw the way into the library
-                                    as heavily as the name it stands beside */}
-                                <Text>Docs</Text>
-                            </BaseHeader.Link>
+                        <nav aria-label="Main" className={classes.menuLinks}>
+                            {menuLinks.map(({ label, href }) => (
+                                // Followed by the router, the way the name of the site beside it
+                                // and the links beside a page are.
+                                //
+                                // The link standing for the page being read is marked as such: the
+                                // menu is drawn on the pages that carry no column of links beside
+                                // them, and one of those is a page the menu itself leads to, so a
+                                // reader is otherwise offered the way to where they already are
+                                // with nothing saying so
+                                <BaseHeader.Link
+                                    key={href}
+                                    as={Link}
+                                    to={href}
+                                    aria-current={pathname === href ? "page" : undefined}
+                                >
+                                    {/* The weight is said rather than left to the link to pass
+                                        down, since the row's link is written to carry the name of
+                                        the site and would otherwise draw the way into the library
+                                        as heavily as the name it stands beside */}
+                                    <Text>{label}</Text>
+                                </BaseHeader.Link>
+                            ))}
                         </nav>
                     </BaseHeader.Item>
                 ) : null}

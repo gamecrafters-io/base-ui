@@ -1,7 +1,5 @@
 import { Card, Heading, Link, Stack } from "@gamecrafters/base-ui/react";
-import gamecraftersAiStudioImage from "../../../assets/showcase/gamecrafters_ai_studio.png";
-import gamecraftersDocumentationImage from "../../../assets/showcase/gamecrafters_documentation.png";
-import sundaeUiImage from "../../../assets/showcase/sundae_ui.png";
+import { showcases } from "../../showcase";
 
 const classes = {
     // The heading is read, the cards under it are looked over, so only the heading is held to a
@@ -38,46 +36,13 @@ const externalLinkProps = {
     rel: "noreferrer",
 } as const;
 
-// One thing the library is put to: the picture, what it is called, what is meant by it, and where
-// it is to be found.
-//
-// The picture is the thing itself as it stands today. It dates as the thing it is taken from
-// changes, so it is worth retaking when that happens; what is bought for that is a reader seeing
-// what was actually built rather than a drawing of what it might look like
-type Showcase = {
-    title: string;
-    description: string;
-    image: string;
-    href: string;
-};
-
-// What the library is put to, each of them a thing that has been built rather than a kind of thing
-// that could be: the studio a model is worked in, the reference it is called through, and a second
-// system standing on the same parts
-const showcases: Showcase[] = [
-    {
-        title: "GameCrafters AI Studio",
-        description: "AI platform",
-        image: gamecraftersAiStudioImage,
-        href: "https://aistudio.gamecrafters.io",
-    },
-    {
-        title: "GameCrafters API Documentation",
-        description: "API documentation platform",
-        image: gamecraftersDocumentationImage,
-        href: "https://docs.gamecrafters.io",
-    },
-    {
-        title: "Sundae UI",
-        description: "Website template",
-        image: sundaeUiImage,
-        href: "https://sundae.gamecrafters.io",
-    },
-];
-
 // What the library is built into. The sections above it say what it is, how far it has got and who
 // stands behind it; this one says what comes out of it, which is the question a reader who has read
 // that far is asking next.
+//
+// What is shown is the showcase page's list rather than one written out again here. That page is
+// what the list is a list of, and this section shows the same things in passing, on the way down a
+// page that is saying what the library is; two lists would be one of them going out of date.
 //
 // Each card leads to the thing it stands for. A reader shown what was built and then left without
 // a way to it is a reader sent off to look for it themselves.

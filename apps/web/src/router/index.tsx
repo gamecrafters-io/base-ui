@@ -106,6 +106,7 @@ import {
     Select,
     SelectPanel,
     Separator,
+    Showcase,
     SkeletonAvatar,
     SkeletonBox,
     SkeletonText,
@@ -159,6 +160,11 @@ const Router = () => (
                 would then have to know the paths as well as draw what stands at them */}
             <Route element={<Layout sidebar={false} />}>
                 <Route index element={<Home />} />
+                {/* What has been built with the library is looked over rather than looked up, so
+                    it stands beside the page the site opens on rather than in the library: it is
+                    reached from the row across the top and is drawn without the column of links,
+                    which names components rather than the things they were used to build */}
+                <Route path="showcase" element={<Showcase />} />
             </Route>
             <Route element={<Layout />}>
                 <Route path="overview/installation" element={<Installation />} />
