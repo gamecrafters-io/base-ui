@@ -36,6 +36,7 @@ export * from "./confirmation-dialog";
 export * from "./context-menu";
 export * from "./counter-label";
 export * from "./data-table";
+export * from "./date-input";
 export * from "./date-picker";
 export * from "./details";
 export * from "./dialog";

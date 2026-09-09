@@ -1,0 +1,140 @@
+@layer components {
+    /* A date typed a part at a time. Reading down: the name, then the field the parts stand in,
+       one under the other where the input draws its own name */
+    .date-input {
+        display: inline-flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: var(--base-size-4);
+    }
+
+    /* A field that fills whatever holds it needs the input around it to fill it too */
+    .date-input-block {
+        display: flex;
+        width: 100%;
+    }
+
+    /* The name over the field, set the way every field's name is */
+    .date-input-label {
+        cursor: pointer;
+        color: var(--foreground-color-default);
+        font-size: var(--text-body-size-medium);
+        font-weight: var(--base-text-weight-semibold);
+    }
+
+    .date-input-label[data-disabled] {
+        cursor: not-allowed;
+        color: var(--control-foreground-color-disabled);
+    }
+
+    /* The field the parts stand in, which takes the look of a text input and lays them out
+       across it. The room at either end is the field's own, since there is no input inside it to
+       carry any; an action at the end stands in the room the padding would have taken. The field
+       classes are the text input's, so this is named alongside them to be read after them */
+    .input.date-input-control {
+        align-items: center;
+        gap: var(--base-size-4);
+        padding-inline: var(--base-size-12);
+
+        &:has(.input-action) {
+            padding-inline-end: 0;
+        }
+    }
+
+    /* The parts of one date, kept on one line and read as one run whichever way the page around
+       them is read */
+    .date-input-segment-group {
+        display: inline-flex;
+        align-items: baseline;
+        white-space: nowrap;
+        unicode-bidi: isolate;
+    }
+
+    /* One part of the date. It is typed into rather than written in, so the browser's own caret
+       is hidden: it stands at the start of the part and stays there however much is typed. A
+       cursor is drawn in its place further down, and the part is the room that cursor is laid
+       out against, which is why it is positioned. Every figure is given the width of a zero, so
+       the field holds still as its parts are filled in */
+    .date-input-segment {
+        /* The room at either end of a part, which is how far in from the part's edge the cursor
+           stands as well, so that it comes where the figures end rather than against whatever
+           the part is followed by */
+        --date-input-segment-padding: var(--base-size-2);
+
+        position: relative;
+        display: inline-block;
+        padding-inline: var(--date-input-segment-padding);
+        outline: none;
+        caret-color: transparent;
+        font-variant-numeric: tabular-nums;
+    }
+
+    /* A separator stands between two parts and is not given room of its own */
+    .date-input-segment-literal {
+        padding-inline: 0;
+    }
+
+    /* A part not yet filled in stands back, so what has been typed is told from what is still
+       to be typed */
+    .date-input-segment-placeholder {
+        color: var(--foreground-color-muted);
+    }
+
+    .date-input-segment-readonly {
+        cursor: default;
+    }
+
+    .date-input-segment-disabled {
+        cursor: not-allowed;
+        color: var(--foreground-color-disabled);
+    }
+
+    /* Last, so a part being typed into carries its cursor whether or not it has been filled in,
+       and only where a part can be typed into: one that can only be read has nowhere for a figure
+       to go. The cursor stands where the next figure will land, which for a part merely arrived
+       at is the start of it: the figure typed there starts the part over, whether the part was
+       standing at mm or dd or yyyy or at a date already typed */
+    .date-input-segment[data-editable]:focus::after {
+        content: "";
+        position: absolute;
+        inset-block: 0;
+        inset-inline-start: var(--date-input-segment-padding);
+        width: var(--border-width-thick);
+        background-color: var(--foreground-color-default);
+        animation: date-input-cursor-blink 1s step-end infinite;
+
+        @media (prefers-reduced-motion: reduce) {
+            animation: none;
+        }
+    }
+
+    /* Once figures have been typed into the part, the next one follows them rather than starting
+       the part over, so the cursor comes after them. After the rule above, so that it is the one
+       of the two that holds */
+    .date-input-segment[data-entered]:focus::after {
+        inset-inline-start: auto;
+        inset-inline-end: var(--date-input-segment-padding);
+    }
+
+    /* A part filled up by what was typed into it takes nothing more where it stands, so there is
+       no figure on its way to it for a cursor to be standing ahead of, and none is drawn. After
+       the rules above, so that it is the one that holds */
+    .date-input-segment[data-filled]:focus::after {
+        content: none;
+    }
+
+    @keyframes date-input-cursor-blink {
+        50% {
+            opacity: 0;
+        }
+    }
+
+    /* A cursor drawn in a colour of its own says nothing in forced colours, so it is drawn in
+       the colour the system keeps for text */
+    @media (forced-colors: active) {
+        .date-input-segment[data-editable]:focus::after {
+            forced-color-adjust: none;
+            background-color: CanvasText;
+        }
+    }
+}
