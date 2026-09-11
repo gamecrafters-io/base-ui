@@ -191,6 +191,7 @@ const sections: SidebarSection[] = [
             { label: "Meter", href: "/components/meter" },
             { label: "NativeSelect", href: "/components/native-select" },
             { label: "NumberInput", href: "/components/number-input" },
+            { label: "PageHeader", href: "/components/page-header" },
             { label: "PageLayout", href: "/components/page-layout" },
             { label: "Pagination", href: "/components/pagination" },
             { label: "PasswordInput", href: "/components/password-input" },

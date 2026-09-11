@@ -80,6 +80,7 @@ import {
     NativeSelect,
     NotFound,
     NumberInput,
+    PageHeader,
     PageLayout,
     Pagination,
     PasswordInput,
@@ -247,6 +248,7 @@ const Router = () => (
                 <Route path="components/meter" element={<Meter />} />
                 <Route path="components/native-select" element={<NativeSelect />} />
                 <Route path="components/number-input" element={<NumberInput />} />
+                <Route path="components/page-header" element={<PageHeader />} />
                 <Route path="components/page-layout" element={<PageLayout />} />
                 <Route path="components/pagination" element={<Pagination />} />
                 <Route path="components/password-input" element={<PasswordInput />} />

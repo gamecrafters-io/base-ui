@@ -75,6 +75,7 @@ export { default as Message } from "./Message";
 export { default as Meter } from "./Meter";
 export { default as NativeSelect } from "./NativeSelect";
 export { default as NumberInput } from "./NumberInput";
+export { default as PageHeader } from "./PageHeader";
 export { default as PageLayout } from "./PageLayout";
 export { default as Pagination } from "./Pagination";
 export { default as PasswordInput } from "./PasswordInput";
