@@ -114,11 +114,17 @@ function FormControl(
         labelId,
     };
 
+    // A clone is a new element, and it is handed back to React among the label, the caption and
+    // whatever else was written, which React reads as a list. An element in a list is asked for
+    // a key, and the one the caller wrote is carried over where there is one to carry
+    const inputKey = React.isValidElement(input) ? (input.key ?? "input") : undefined;
+
     const wiredInput = React.isValidElement<FormControlInputProps>(input)
         ? React.cloneElement(
               input,
               isHorizontal
                   ? {
+                        key: inputKey,
                         id,
                         disabled,
                         // A radio is never required on its own: a group of them is required
@@ -129,6 +135,7 @@ function FormControl(
                         "aria-describedby": captionId,
                     }
                   : {
+                        key: inputKey,
                         id,
                         disabled,
                         required,
