@@ -175,6 +175,7 @@ const sections: SidebarSection[] = [
             { label: "HoverCard", href: "/components/hover-card" },
             { label: "IconButton", href: "/components/icon-button" },
             { label: "Image", href: "/components/image" },
+            { label: "InlineEdit", href: "/components/inline-edit" },
             { label: "InlineMessage", href: "/components/inline-message" },
             { label: "JSONTreeView", href: "/components/json-tree-view" },
             { label: "KeybindingHint", href: "/components/keybinding-hint" },

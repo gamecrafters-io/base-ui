@@ -59,6 +59,7 @@ export { default as Highlight } from "./Highlight";
 export { default as HoverCard } from "./HoverCard";
 export { default as IconButton } from "./IconButton";
 export { default as Image } from "./Image";
+export { default as InlineEdit } from "./InlineEdit";
 export { default as InlineMessage } from "./InlineMessage";
 export { default as JSONTreeView } from "./JSONTreeView";
 export { default as KeybindingHint } from "./KeybindingHint";

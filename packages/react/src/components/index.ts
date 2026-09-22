@@ -59,6 +59,7 @@ export * from "./highlight";
 export * from "./hover-card";
 export * from "./icon-button";
 export * from "./image";
+export * from "./inline-edit";
 export * from "./inline-message";
 export * from "./json-tree-view";
 export * from "./keybinding-hint";

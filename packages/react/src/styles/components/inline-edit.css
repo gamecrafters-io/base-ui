@@ -1,0 +1,208 @@
+@layer components {
+    /* A value read where it stands and edited in the same place. Reading down: the name, then the
+       value with its triggers beside it. Anything else written into the inline edit, a hint say,
+       takes a row of its own under them, and the value and the triggers keep to their columns
+       whichever order they were written in */
+    .inline-edit {
+        display: inline-grid;
+        grid-template-columns: minmax(0, 1fr) auto;
+        grid-auto-flow: row dense;
+        align-items: start;
+        gap: var(--base-size-4) var(--stack-gap-condensed);
+
+        & > * {
+            grid-column: 1 / -1;
+        }
+
+        & > .inline-edit-area {
+            grid-column: 1;
+        }
+
+        & > .inline-edit-control {
+            grid-column: 2;
+        }
+    }
+
+    /* With no triggers beside it the value has the row to itself, and no room is kept for them */
+    .inline-edit:not(:has(> .inline-edit-control)) {
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    /* An inline edit that fills whatever holds it, the value taking whatever room the triggers
+       leave */
+    .inline-edit-block {
+        display: grid;
+        width: 100%;
+    }
+
+    /* The name over the value, set the way every field's name is. It is only as wide as its words,
+       so a press beside it is not taken for a press on it */
+    .inline-edit-label {
+        justify-self: start;
+        cursor: pointer;
+        color: var(--foreground-color-default);
+        font-size: var(--text-body-size-medium);
+        font-weight: var(--base-text-weight-semibold);
+    }
+
+    /* A value that can only be read has no edit for a press on its name to start */
+    .inline-edit-label[data-readonly] {
+        cursor: default;
+    }
+
+    .inline-edit-label[data-disabled] {
+        cursor: not-allowed;
+        color: var(--control-foreground-color-disabled);
+    }
+
+    /* Where the value stands. The preview and the field take the one place between them, and
+       whichever is standing fills it. `min-width: 0` goes with that: without it a long value would
+       hold the row open past whatever holds the inline edit */
+    .inline-edit-area {
+        display: flex;
+        min-width: 0;
+    }
+
+    /* Grown with the value, the preview and the field are laid over each other in the one cell,
+       and the preview, out of sight behind the field while it is typed into, measures the room
+       for both. The area keeps to the width of the value rather than taking whatever room the row
+       has, and to no more than the row */
+    .inline-edit-area[data-autoresize] {
+        display: inline-grid;
+        justify-self: start;
+        max-width: 100%;
+
+        & > .inline-edit-input,
+        & > .inline-edit-preview {
+            grid-area: 1 / 1;
+        }
+    }
+
+    /* The field, drawn from the text input's classes, which is why it is named alongside them to
+       be read after them. There is no typing area inside it to carry the room either side of the
+       text, so it carries that room itself, as much of it as a text input's typing area does */
+    .input.inline-edit-input {
+        width: 100%;
+        min-width: 0;
+        padding-inline: var(--base-size-12);
+        appearance: none;
+
+        &::placeholder {
+            color: var(--foreground-color-muted);
+        }
+
+        &:disabled {
+            cursor: not-allowed;
+        }
+    }
+
+    /* A box of lines scrolls rather than hiding what runs past it, and is only ever made taller,
+       so the triggers beside it stay where they are */
+    .input.inline-edit-input:is(textarea) {
+        overflow: auto;
+        resize: vertical;
+    }
+
+    /* A box of lines is read from the top, so it is given the room above and below its text that a
+       single line is given by the height of the field: what the height leaves around the line,
+       less the border. The small and the large field say as much themselves */
+    .input.inline-edit-input:is(textarea)[data-size="medium"] {
+        padding-block: calc(
+            (var(--control-medium-size) - var(--base-size-20)) / 2 - var(--border-width-thin)
+        );
+    }
+
+    /* The value as it is read, set exactly as the field is at each size: as tall, with the same
+       room around the text, and edged with a border as wide as the field's drawn in no colour, so
+       the text stands where the field's will as the one takes the other's place */
+    .inline-edit-preview {
+        display: block;
+        width: 100%;
+        min-width: 0;
+        min-height: var(--control-medium-size);
+        padding-block: calc(
+            (var(--control-medium-size) - var(--base-size-20)) / 2 - var(--border-width-thin)
+        );
+        padding-inline: var(--base-size-12);
+        border: var(--border-width-thin) solid transparent;
+        border-radius: var(--border-radius-medium);
+        color: var(--foreground-color-default);
+        font-size: var(--text-body-size-medium);
+        line-height: var(--base-size-20);
+        /* What was typed is shown the way it was typed, its lines and its runs of spaces with it,
+           and a word too long for the room is broken rather than left to run past the edge */
+        white-space: pre-wrap;
+        overflow-wrap: anywhere;
+        transition: background-color var(--motion-transition-hover);
+
+        @media (prefers-reduced-motion: reduce) {
+            transition: none;
+        }
+    }
+
+    .inline-edit-preview[data-size="small"] {
+        min-height: var(--control-small-size);
+        padding-block: var(--control-small-padding-block);
+        font-size: var(--text-body-size-small);
+    }
+
+    .inline-edit-preview[data-size="large"] {
+        min-height: var(--control-large-size);
+        padding-block: var(--control-large-padding-block);
+    }
+
+    /* A preview that is a way into the edit takes the text cursor the field it stands for would,
+       and answers the pointer resting on it */
+    .inline-edit-preview[role="button"]:not([data-disabled]) {
+        cursor: text;
+
+        &:hover {
+            background-color: var(--control-transparent-background-color-hover);
+        }
+
+        &:active {
+            background-color: var(--control-transparent-background-color-active);
+        }
+    }
+
+    /* What stands in for a value not yet written stands back, so it is told from a value */
+    .inline-edit-preview[data-placeholder-shown] {
+        color: var(--foreground-color-muted);
+    }
+
+    /* A value that will not do is edged in the colour a field that will not do is */
+    .inline-edit-preview[data-invalid] {
+        border-color: var(--border-color-danger-emphasis);
+    }
+
+    /* After the placeholder, so a value that cannot be edited reads as one whether or not anything
+       is standing in for it */
+    .inline-edit-preview[data-disabled] {
+        cursor: not-allowed;
+        color: var(--foreground-color-disabled);
+    }
+
+    /* A preview grown with the value is what says how wide the field is, so its lines are kept
+       whole, as wide as the longest of them, and cut where the room runs out rather than wrapped */
+    .inline-edit-preview[data-autoresize] {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: pre;
+    }
+
+    /* Grown with the value, whichever of the two is not standing is kept in its place out of sight
+       rather than taken off the page, so the preview goes on measuring the room while the field
+       is typed into */
+    .inline-edit-input[data-autoresize]:not([data-editing]),
+    .inline-edit-preview[data-autoresize][data-editing] {
+        visibility: hidden;
+    }
+
+    /* The triggers, read across beside the value. The row holds them against the top of it, so
+       beside a box of lines they stand level with the first line rather than in the middle */
+    .inline-edit-control {
+        display: flex;
+        align-items: center;
+        gap: var(--base-size-4);
+    }
+}

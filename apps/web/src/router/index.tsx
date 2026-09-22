@@ -61,6 +61,7 @@ import {
     HoverCard,
     IconButton,
     Image,
+    InlineEdit,
     InlineMessage,
     Installation,
     JSONTreeView,
@@ -232,6 +233,7 @@ const Router = () => (
                 <Route path="components/hover-card" element={<HoverCard />} />
                 <Route path="components/icon-button" element={<IconButton />} />
                 <Route path="components/image" element={<Image />} />
+                <Route path="components/inline-edit" element={<InlineEdit />} />
                 <Route path="components/inline-message" element={<InlineMessage />} />
                 <Route path="components/json-tree-view" element={<JSONTreeView />} />
                 <Route path="components/keybinding-hint" element={<KeybindingHint />} />
