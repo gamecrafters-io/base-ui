@@ -1,0 +1,282 @@
+@layer components {
+    /* The backdrop dims the page the dialog stands over. It is drawn beneath the layer the dialog
+       is laid out in rather than being that layer, so that it fades in and out on its own and the
+       dialog is never drawn through it */
+    .layer-dialog-backdrop {
+        position: fixed;
+        inset: 0;
+        background-color: var(--overlay-backdrop-background-color);
+    }
+
+    /* A modeless dialog leaves the page behind it to be used, so nothing is dimmed and nothing is
+       caught */
+    .layer-dialog-backdrop-modeless {
+        background-color: transparent;
+        pointer-events: none;
+    }
+
+    /* The layer the dialog is laid out in covers the page, so a press anywhere around the dialog
+       lands on it. A narrow screen stands the dialog along its bottom edge as a sheet; one with
+       room to spare holds it off the sides and stands it where it was asked to. The width matches
+       --breakpoint-medium in variables.css */
+    .layer-dialog-viewport {
+        position: fixed;
+        inset: 0;
+        display: flex;
+        align-items: flex-end;
+        justify-content: center;
+
+        @media (width >= 48rem) {
+            padding-inline: var(--base-size-16);
+        }
+    }
+
+    /* A modeless dialog catches nothing around it, so the page stays within reach */
+    .layer-dialog-viewport-modeless {
+        pointer-events: none;
+    }
+
+    /* The room kept above and below the dialog is the layer's to keep rather than the dialog's,
+       and the dialog fills whatever is left. Placed either way, a tall dialog can never run off
+       the bottom of the screen, since what it is capped at is worked out from the same room */
+    .layer-dialog-viewport-align-top {
+        @media (width >= 48rem) {
+            align-items: flex-start;
+            padding-top: var(--base-size-64);
+            padding-bottom: var(--base-size-24);
+        }
+    }
+
+    .layer-dialog-viewport-align-center {
+        @media (width >= 48rem) {
+            align-items: center;
+            padding-block: var(--base-size-24);
+        }
+    }
+
+    /* The dialog is as tall as what it holds, up to most of a narrow screen and all of the room a
+       wider one leaves it. It takes the whole width of a narrow screen, and as much of a wider
+       one as its size allows.
+
+       A sheet stands wherever a swipe has pulled it to, and settles back from there once it is
+       let go of without having been pulled far enough to close it */
+    .layer-dialog {
+        display: flex;
+        width: 100%;
+        min-height: 0;
+        max-height: 85dvh;
+        outline: none;
+        pointer-events: auto;
+        transform: translate3d(0, var(--layer-dialog-swipe-offset, 0px), 0);
+        transition: transform var(--motion-duration-short) var(--motion-easing-move);
+
+        @media (width >= 48rem) {
+            max-height: 100%;
+        }
+    }
+
+    /* A sheet being swiped follows the finger exactly, and its words are not selected on the way */
+    .layer-dialog[data-swiping] {
+        transition: none;
+        user-select: none;
+    }
+
+    .layer-dialog-size-small {
+        @media (width >= 48rem) {
+            max-width: var(--overlay-width-small);
+        }
+    }
+
+    .layer-dialog-size-medium {
+        @media (width >= 48rem) {
+            max-width: var(--overlay-width-medium);
+        }
+    }
+
+    .layer-dialog-size-large {
+        @media (width >= 48rem) {
+            max-width: var(--overlay-width-large);
+        }
+    }
+
+    .layer-dialog-size-xlarge {
+        @media (width >= 48rem) {
+            max-width: var(--overlay-width-xlarge);
+        }
+    }
+
+    /* The dialog is drawn as the recessed layer of a layered card, with the body standing on it
+       as the primary layer and the actions standing below the body. The card settles that it is
+       layered from what it is handed, and the body is not something it can see is a layer, so
+       the recessed treatment is named here instead.
+
+       A sheet runs the whole way along the bottom of the screen and gives up the two corners it
+       meets there */
+    .layer-dialog-card {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        min-height: 0;
+        max-height: 85dvh;
+        padding: var(--base-size-6);
+        background-color: var(--background-color-inset);
+        border-color: var(--border-color-muted);
+        border-bottom-width: 0;
+        border-bottom-left-radius: 0;
+        border-bottom-right-radius: 0;
+        box-shadow: var(--shadow-floating-small);
+
+        @media (width >= 48rem) {
+            max-height: 100%;
+            border-bottom-width: var(--border-width-thin);
+            border-radius: var(--border-radius-large);
+        }
+    }
+
+    /* What a sheet is pulled down by, drawn as a short bar above the body */
+    .layer-dialog-handle {
+        display: flex;
+        flex-shrink: 0;
+        justify-content: center;
+        padding-top: var(--base-size-6);
+        padding-bottom: var(--base-size-12);
+
+        &::before {
+            content: "";
+            width: var(--base-size-40);
+            height: var(--base-size-4);
+            background-color: var(--border-color-default);
+            border-radius: var(--border-radius-full);
+        }
+    }
+
+    /* Where a sheet can be swiped away, a finger laid on what it is taken hold of by moves the
+       sheet rather than the page */
+    .layer-dialog[data-swipeable] [data-swipe-area] {
+        touch-action: none;
+    }
+
+    /* The body is the primary layer, and lays out the frame the title stands in, what scrolls
+       beneath it and, on a sheet, the actions beneath that. It is the part that gives way when the
+       dialog runs out of height, so that only what is being read scrolls */
+    .layer-dialog-body {
+        flex: 1 1 auto;
+        min-height: 0;
+        gap: 0;
+        padding: 0;
+    }
+
+    /* The frame the title stands in stays where it is while the body scrolls. Its parts are read
+       from the top, so a title running onto a second line leaves the X where it started */
+    .layer-dialog-header {
+        display: flex;
+        flex-shrink: 0;
+        align-items: flex-start;
+        justify-content: space-between;
+        gap: var(--base-size-16);
+        padding: var(--base-size-16);
+    }
+
+    .layer-dialog-heading {
+        display: flex;
+        flex-direction: column;
+        min-width: 0;
+    }
+
+    /* The dialog is a document of its own while it is open, so its title reads as the heading of
+       one rather than taking the size that comes with where it stands in the page */
+    .layer-dialog-title {
+        margin: 0;
+        font: var(--text-title-shorthand-small);
+        overflow-wrap: break-word;
+    }
+
+    /* The description folds away under the title once the body has been scrolled. A row of a grid
+       can be folded to nothing where a height could not, since the description is as tall as its
+       words come to */
+    .layer-dialog-description-frame {
+        display: grid;
+        grid-template-rows: 1fr;
+        opacity: 1;
+        transition-property: grid-template-rows, opacity;
+        transition-duration: var(--motion-duration-short);
+        transition-timing-function: var(--motion-easing-move);
+
+        @media (prefers-reduced-motion: reduce) {
+            transition: none;
+        }
+    }
+
+    .layer-dialog-description-frame[data-condensed] {
+        grid-template-rows: 0fr;
+        opacity: 0;
+    }
+
+    .layer-dialog-description-clip {
+        min-height: 0;
+        overflow: hidden;
+    }
+
+    /* The room above the description is its own, so that it folds away along with the words
+       rather than staying behind as a gap under the title */
+    .layer-dialog-description {
+        margin: 0;
+        padding-top: var(--base-size-4);
+        color: var(--foreground-color-muted);
+        font: var(--text-body-shorthand-medium);
+    }
+
+    /* The X stands in the corner of the frame, drawn up into the room around the title so that it
+       lines up with the title's first line rather than standing below it */
+    .layer-dialog-close-button {
+        flex-shrink: 0;
+        margin-top: calc(-1 * var(--base-size-4));
+        margin-inline-end: calc(-1 * var(--base-size-4));
+    }
+
+    /* What scrolls fades out at whichever edge there is more of it past, by as far as it has
+       been scrolled from that edge up to the depth of the fade. At either end there is nothing
+       past the edge, so nothing fades */
+    .layer-dialog-scroll {
+        flex: 1 1 auto;
+        min-height: 0;
+        overflow-y: auto;
+        overscroll-behavior: contain;
+        mask-image: linear-gradient(
+            to bottom,
+            transparent 0,
+            #000 min(var(--base-size-24), var(--layer-dialog-scroll-start, 0px)),
+            #000 calc(100% - min(var(--base-size-24), var(--layer-dialog-scroll-end, 0px))),
+            transparent 100%
+        );
+    }
+
+    .layer-dialog-content {
+        padding-inline: var(--base-size-16);
+        padding-bottom: var(--base-size-16);
+    }
+
+    /* On a sheet the actions stand in the body beneath what scrolls, set off from it by a line */
+    .layer-dialog-body-footer {
+        flex-shrink: 0;
+        padding: var(--base-size-16);
+        border-top: var(--border-width-thin) solid var(--border-color-default);
+    }
+
+    /* The button that closes the dialog stands at one end and the action at the other, so the
+       two are never mistaken for one another */
+    .layer-dialog-actions {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: var(--base-size-8);
+        width: 100%;
+    }
+
+    /* Where there is room, the actions stand on the recessed layer below the body, the way the
+       layer behind a layered card shows below what stands on it */
+    .layer-dialog-actions-recessed {
+        flex-shrink: 0;
+        padding-top: var(--base-size-6);
+    }
+}

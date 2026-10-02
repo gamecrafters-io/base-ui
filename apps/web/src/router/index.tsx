@@ -69,6 +69,7 @@ import {
     Label,
     LabelGroup,
     LayerCard,
+    LayerDialog,
     Link,
     List,
     Map,
@@ -125,6 +126,7 @@ import {
     Switch,
     TableOfContents,
     Tabs,
+    TagInput,
     Text,
     Textarea,
     TextInput,
@@ -240,6 +242,7 @@ const Router = () => (
                 <Route path="components/label" element={<Label />} />
                 <Route path="components/label-group" element={<LabelGroup />} />
                 <Route path="components/layer-card" element={<LayerCard />} />
+                <Route path="components/layer-dialog" element={<LayerDialog />} />
                 <Route path="components/link" element={<Link />} />
                 <Route path="components/list" element={<List />} />
                 <Route path="components/map" element={<Map />} />
@@ -289,6 +292,7 @@ const Router = () => (
                 <Route path="components/switch" element={<Switch />} />
                 <Route path="components/table-of-contents" element={<TableOfContents />} />
                 <Route path="components/tabs" element={<Tabs />} />
+                <Route path="components/tag-input" element={<TagInput />} />
                 <Route path="components/text" element={<Text />} />
                 <Route path="components/textarea" element={<Textarea />} />
                 <Route path="components/text-input" element={<TextInput />} />

@@ -1,0 +1,154 @@
+@layer components {
+    /* A tag input is a column: its name, then the control the tags stand in. Left to itself it is as
+       wide as a field in a form is usually drawn, and the tags wrap onto further lines inside it
+       rather than widening it as they are added */
+    .tag-input {
+        display: inline-flex;
+        flex-direction: column;
+        gap: var(--base-size-4);
+        width: var(--overlay-width-small);
+        max-width: 100%;
+        vertical-align: top;
+    }
+
+    /* A tag input that fills whatever holds it */
+    .tag-input-block {
+        display: flex;
+        width: 100%;
+    }
+
+    /* The name over the tags, set the way every field's name is. It is only as wide as its words,
+       so a press beside it is not taken for a press on it */
+    .tag-input-label {
+        align-self: flex-start;
+        color: var(--foreground-color-default);
+        font-size: var(--text-body-size-medium);
+        font-weight: var(--base-text-weight-semibold);
+    }
+
+    .tag-input-label[data-disabled] {
+        color: var(--foreground-color-disabled);
+    }
+
+    /* The control is drawn from the text input's classes, which is why it is named alongside them
+       to be read after them. The tags wrap inside it, the field taking whatever room the last line
+       of them leaves, and the room around them is what the field's height leaves around a button
+       standing in a field, less the border, so a control holding one line of tags is as tall as
+       any other field.
+
+       Everything standing in it is as tall as a token a step smaller than the field, which the
+       field the next tag is typed into and the one a tag is edited in read their height from */
+    .input.tag-input-control {
+        --tag-input-item-height: var(--base-size-20);
+
+        flex-wrap: wrap;
+        align-items: center;
+        gap: var(--base-size-4);
+        width: 100%;
+        padding: calc(var(--base-size-4) - var(--border-width-thin));
+    }
+
+    .input.tag-input-control[data-size="small"] {
+        --tag-input-item-height: var(--base-size-16);
+    }
+
+    .input.tag-input-control[data-size="large"] {
+        --tag-input-item-height: var(--base-size-24);
+    }
+
+    /* The field is what is typed into rather than what is drawn: the control around it is already a
+       field to look at, so this keeps only the typing area. It takes whatever room the last line of
+       tags leaves, and starts a line of its own where too little is left to type into */
+    .tag-input-input {
+        flex: 1 1 var(--base-size-48);
+        min-width: var(--base-size-48);
+        height: var(--tag-input-item-height);
+        padding-block: 0;
+        padding-inline: var(--base-size-4);
+        appearance: none;
+        background-color: transparent;
+        border: 0;
+        outline: none;
+        color: inherit;
+        font: inherit;
+
+        &::placeholder {
+            color: var(--foreground-color-muted);
+        }
+
+        &:disabled {
+            cursor: not-allowed;
+        }
+    }
+
+    /* The button stands at the inline end of the control, apart from the tags, so it stays where it
+       is as they wrap rather than being carried onto a line of its own. The control keeps room for
+       it there, and gives the room back once the button stands down. It is drawn from the text
+       input's own button for standing in a field, so it is sized by the field it stands in */
+    .input.tag-input-control:has(> .tag-input-clear-trigger) {
+        padding-inline-end: calc(var(--text-input-action-size) + var(--base-size-8));
+    }
+
+    .button.input-action-button.tag-input-clear-trigger {
+        position: absolute;
+        top: 50%;
+        inset-inline-end: calc(var(--base-size-4) - var(--border-width-thin));
+        translate: 0 -50%;
+    }
+
+    .tag-input-item {
+        display: inline-flex;
+        min-width: 0;
+        max-width: 100%;
+    }
+
+    /* The tag is drawn from the token's classes, which is why it is named alongside them to be
+       read after them. One the reader has moved onto from the keyboard is ringed the way anything
+       focused is, since the caret staying in the field is all that would otherwise say where they
+       are */
+    .token.tag-input-item-preview[data-highlighted] {
+        box-shadow: 0 0 0 var(--focus-outline-width) var(--focus-outline-color);
+    }
+
+    /* The button that takes the tag out carries the room at that end, so the tag gives up its own.
+       A tag input that can only be read stands the button down, and the tag keeps its room there */
+    .token.tag-input-item-preview:has(> .tag-input-item-delete-trigger:not([hidden])) {
+        padding-inline-end: 0;
+    }
+
+    /* A tag about to be taken out says so while the pointer rests on the button that would */
+    .token.tag-input-item-preview:has(> .tag-input-item-delete-trigger:enabled:hover) {
+        border-color: var(--border-color-danger-emphasis);
+        color: var(--foreground-color-danger);
+    }
+
+    .token.tag-input-item-preview[data-disabled] {
+        color: var(--foreground-color-disabled);
+    }
+
+    /* A button that cannot take its tag out answers nothing the pointer does */
+    .token-remove-button.tag-input-item-delete-trigger:disabled {
+        cursor: not-allowed;
+        background-color: transparent;
+    }
+
+    /* The field a tag is edited in stands where the tag stood, as tall and as round as it, edged in
+       the colour a focused field is. It grows with what it holds rather than being given a width of
+       its own, a character at a time where the browser cannot size it to the text exactly */
+    .tag-input-item-input {
+        min-width: var(--base-size-24);
+        max-width: 100%;
+        height: var(--tag-input-item-height);
+        padding-block: 0;
+        padding-inline: var(--base-size-6);
+        appearance: none;
+        background-color: var(--background-color-default);
+        border: var(--border-width-thin) solid var(--border-color-accent-emphasis);
+        border-radius: var(--border-radius-full);
+        outline: none;
+        color: var(--foreground-color-default);
+        font: inherit;
+        font-size: var(--text-body-size-small);
+        field-sizing: content;
+    }
+}
