@@ -147,6 +147,7 @@ const sections: SidebarSection[] = [
             { label: "Clipboard", href: "/components/clipboard" },
             { label: "Code", href: "/components/code" },
             { label: "CodeBlock", href: "/components/code-block" },
+            { label: "CodeEditor", href: "/components/code-editor" },
             { label: "Collapsible", href: "/components/collapsible" },
             { label: "Combobox", href: "/components/combobox" },
             { label: "CommandPalette", href: "/components/command-palette" },

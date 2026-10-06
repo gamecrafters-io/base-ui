@@ -1,9 +1,31 @@
 import * as React from "react";
 import { createRoot } from "react-dom/client";
-import { LocaleProvider, ThemeProvider } from "@gamecrafters/base-ui/react";
+import {
+    configureCodeEditorWorkers,
+    LocaleProvider,
+    ThemeProvider,
+} from "@gamecrafters/base-ui/react";
+import EditorWorker from "monaco-editor/editor/editor.worker?worker";
+import CssWorker from "monaco-editor/languages/features/css/css.worker?worker";
+import HtmlWorker from "monaco-editor/languages/features/html/html.worker?worker";
+import JsonWorker from "monaco-editor/languages/features/json/json.worker?worker";
+import TsWorker from "monaco-editor/languages/features/typescript/ts.worker?worker";
 import Router from "./router";
 import "@gamecrafters/base-ui/main.css";
 import "./styles/main.css";
+
+// The code editor runs its language services on web workers, each a file of its own that only
+// the bundler can place, so the site says how each is started before any editor is shown. Vite
+// bundles a worker from an import ending in `?worker`, and Monaco asks for one by the language
+// it is reading: the editor's own answers for every language, and the other four for the ones
+// Monaco understands rather than merely colours
+configureCodeEditorWorkers({
+    editor: () => new EditorWorker(),
+    css: () => new CssWorker(),
+    html: () => new HtmlWorker(),
+    json: () => new JsonWorker(),
+    typescript: () => new TsWorker(),
+});
 
 const classes = {
     // The provider is the element carrying `data-theme`, and the background the tokens resolve

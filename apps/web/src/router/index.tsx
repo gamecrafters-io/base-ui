@@ -32,6 +32,7 @@ import {
     Clipboard,
     Code,
     CodeBlock,
+    CodeEditor,
     Collapsible,
     Combobox,
     CommandPalette,
@@ -207,6 +208,7 @@ const Router = () => (
                 <Route path="components/clipboard" element={<Clipboard />} />
                 <Route path="components/code" element={<Code />} />
                 <Route path="components/code-block" element={<CodeBlock />} />
+                <Route path="components/code-editor" element={<CodeEditor />} />
                 <Route path="components/collapsible" element={<Collapsible />} />
                 <Route path="components/combobox" element={<Combobox />} />
                 <Route path="components/command-palette" element={<CommandPalette />} />

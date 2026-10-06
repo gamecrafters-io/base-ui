@@ -1,6 +1,24 @@
 import type { Preview, Renderer } from "@storybook/react-vite";
 import { withThemeByDataAttribute } from "@storybook/addon-themes";
+import EditorWorker from "monaco-editor/editor/editor.worker?worker";
+import CssWorker from "monaco-editor/languages/features/css/css.worker?worker";
+import HtmlWorker from "monaco-editor/languages/features/html/html.worker?worker";
+import JsonWorker from "monaco-editor/languages/features/json/json.worker?worker";
+import TsWorker from "monaco-editor/languages/features/typescript/ts.worker?worker";
+import { configureCodeEditorWorkers } from "../../../packages/react/src/lib/code-editor";
 import "../../../packages/react/src/styles/main.css";
+
+// The code editor runs its language services on web workers, each a file of its own that only
+// the bundler can place, so the Storybook says how each is started before any story shows an
+// editor. Vite bundles a worker from an import ending in `?worker`, and Monaco asks for one by
+// the language it is reading
+configureCodeEditorWorkers({
+    editor: () => new EditorWorker(),
+    css: () => new CssWorker(),
+    html: () => new HtmlWorker(),
+    json: () => new JsonWorker(),
+    typescript: () => new TsWorker(),
+});
 
 const preview: Preview = {
     // The design tokens in styles/themes are scoped to [data-theme], so stories only

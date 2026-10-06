@@ -42,6 +42,7 @@
     "@storybook/addon-themes": "^10.4.2",
     "@storybook/react-vite": "^10.4.2",
     "@tailwindcss/vite": "^4.3.3",
+    "monaco-editor": "^0.57.0",
     "storybook": "^10.4.2",
     "tailwindcss": "^4.3.2",
     "typescript": "^6.0.3",

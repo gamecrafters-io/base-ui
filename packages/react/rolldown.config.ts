@@ -40,5 +40,7 @@ export default defineConfig({
         /^@lexical\//,
         "recharts",
         /^recharts\//,
+        "monaco-editor",
+        /^monaco-editor\//,
     ],
 });

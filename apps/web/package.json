@@ -33,6 +33,7 @@
   },
   "homepage": "https://github.com/gamecrafters-io/base-ui#readme",
   "dependencies": {
+    "monaco-editor": "^0.57.0",
     "react": "^19.2.0",
     "react-dom": "^19.2.0",
     "react-router": "^8.3.0",

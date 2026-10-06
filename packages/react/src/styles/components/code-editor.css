@@ -1,0 +1,123 @@
+@layer components {
+    /* A code editor standing in a box of its own: the Monaco editor in the frame a textarea is
+       drawn in, so an editor sits with the rest of a form rather than opening a window of its
+       own onto it.
+
+       Everything the editor is painted from comes through custom properties, as the globe's
+       colours and the code block's ground do, so a caller can repaint an editor without having
+       to unpick the classes it came with. Monaco is handed a theme rather than a stylesheet, so
+       the component reads these off this element and defines the theme from them, and reads
+       them again when the scheme changes. That is why each is written as a token rather than
+       left to a class: a theme is only ever given colours.
+
+       The height is the one measurement an editor cannot work out for itself: it is drawn to
+       whatever room it is given, and given none it would be drawn to nothing at all. What it
+       falls back to is tall enough to read a function off and short enough to stand in a form.
+       The width is left to whatever the editor was put in, the way anything else on the page
+       finds one */
+    .code-editor {
+        --code-editor-width: auto;
+        --code-editor-height: 20rem;
+
+        /* Which of Monaco's own themes the colours below are laid over, so that whatever is not
+           named here is still drawn for the right scheme */
+        --code-editor-base-theme: vs;
+
+        /* The ground, the text and the cursor, as the design system draws a code editor */
+        --code-editor-background-color: var(--code-mirror-background-color);
+        --code-editor-foreground-color: var(--code-mirror-foreground-color);
+        --code-editor-cursor-color: var(--code-mirror-cursor-foreground-color);
+        --code-editor-selection-background-color: var(--code-mirror-selection-background-color);
+        --code-editor-active-line-background-color: var(--code-mirror-activeline-background-color);
+
+        /* The gutter the line numbers stand in, and the number of the line the cursor is on */
+        --code-editor-gutter-background-color: var(--code-mirror-gutters-background-color);
+        --code-editor-line-number-color: var(--code-mirror-line-number-foreground-color);
+        --code-editor-active-line-number-color: var(--code-mirror-foreground-color);
+        --code-editor-matching-bracket-color: var(--code-mirror-matching-bracket-foreground-color);
+
+        /* The lines drawn down the indentation, and the marks drawn for whitespace */
+        --code-editor-guide-color: var(--border-color-muted);
+        --code-editor-active-guide-color: var(--border-color-default);
+
+        /* What Monaco opens over the text, a list of suggestions or a hover, drawn as the rest of
+           the library draws an overlay */
+        --code-editor-widget-background-color: var(--overlay-background-color);
+        --code-editor-widget-border-color: var(--overlay-border-color);
+        --code-editor-widget-selected-background-color: var(--background-color-neutral-muted);
+        --code-editor-focus-color: var(--focus-outline-color);
+
+        /* The squiggles under what a language service objected to */
+        --code-editor-error-color: var(--foreground-color-danger);
+        --code-editor-warning-color: var(--foreground-color-attention);
+        --code-editor-info-color: var(--foreground-color-accent);
+
+        /* The lines and the words a diff marks as added and taken away */
+        --code-editor-inserted-line-background-color: var(
+            --diff-blob-addition-line-background-color
+        );
+        --code-editor-removed-line-background-color: var(
+            --diff-blob-deletion-line-background-color
+        );
+        --code-editor-inserted-text-background-color: var(
+            --diff-blob-addition-word-background-color
+        );
+        --code-editor-removed-text-background-color: var(
+            --diff-blob-deletion-word-background-color
+        );
+
+        /* What each kind of token is coloured, from the eight colours the design system colours
+           code with. A tag and a JSON key are coloured as GitHub colours them, which is apart
+           from the rest */
+        --code-editor-syntax-comment-color: var(--code-mirror-syntax-foreground-color-comment);
+        --code-editor-syntax-constant-color: var(--code-mirror-syntax-foreground-color-constant);
+        --code-editor-syntax-entity-color: var(--code-mirror-syntax-foreground-color-entity);
+        --code-editor-syntax-keyword-color: var(--code-mirror-syntax-foreground-color-keyword);
+        --code-editor-syntax-string-color: var(--code-mirror-syntax-foreground-color-string);
+        --code-editor-syntax-support-color: var(--code-mirror-syntax-foreground-color-support);
+        --code-editor-syntax-variable-color: var(--code-mirror-syntax-foreground-color-variable);
+        --code-editor-syntax-tag-color: var(--prettylights-syntax-entity-tag);
+        --code-editor-syntax-invalid-color: var(--prettylights-syntax-invalid-illegal-text);
+
+        position: relative;
+        width: var(--code-editor-width);
+        height: var(--code-editor-height);
+        /* An editor given a width wider than the room it has is brought down to fit rather than
+           running past the edge of what it stands in */
+        max-width: 100%;
+        overflow: hidden;
+        /* What is seen before Monaco has arrived, so the box reads as a field waiting rather
+           than as a hole cut in the page */
+        background-color: var(--code-editor-background-color);
+        border-style: solid;
+        border-width: var(--border-width-thin);
+        border-color: var(--control-border-color-rest);
+        border-radius: var(--border-radius-medium);
+        color: var(--code-editor-foreground-color);
+        /* The face and the size the text is set in, which are the code block's. Monaco measures
+           the text itself rather than inheriting a font, so the component reads these off the
+           element and hands them on */
+        font: var(--text-code-block-shorthand);
+
+        /* The frame carries the focus ring on behalf of the text area inside it, which has no
+           border of its own, since the ring belongs on the field a reader sees */
+        &:focus-within {
+            border-color: var(--border-color-accent-emphasis);
+            outline: var(--focus-outline-width) solid var(--focus-outline-color);
+            outline-offset: -1px;
+        }
+
+        /* The dark scheme lays the same tokens over Monaco's dark theme, so that whatever the
+           tokens do not name is drawn dark as well */
+        [data-theme="dark"] & {
+            --code-editor-base-theme: vs-dark;
+        }
+    }
+
+    /* Where Monaco itself draws. The component sizes the box above and the surface fills it,
+       rather than each being given a size of its own to disagree with the other */
+    .code-editor-surface {
+        width: 100%;
+        height: 100%;
+    }
+}

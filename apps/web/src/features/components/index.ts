@@ -31,6 +31,7 @@ export { default as CheckboxGroup } from "./CheckboxGroup";
 export { default as Clipboard } from "./Clipboard";
 export { default as Code } from "./Code";
 export { default as CodeBlock } from "./CodeBlock";
+export { default as CodeEditor } from "./CodeEditor";
 export { default as Collapsible } from "./Collapsible";
 export { default as Combobox } from "./Combobox";
 export { default as CommandPalette } from "./CommandPalette";
