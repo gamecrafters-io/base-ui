@@ -4,10 +4,10 @@ import type { RegisterTool } from "./tools.types";
 
 const DESCRIPTION =
     "What an application does once, before any Base UI component is written into it: the " +
-    "package it installs, the stylesheet it imports, and the providers it wraps itself in " +
-    "for the design tokens to resolve under. Ask for this first when working against the " +
-    "library for the first time in a codebase, since a component drawn without them comes " +
-    "out unstyled.";
+    "package it installs, the stylesheet it imports, the providers it wraps itself in for " +
+    "the design tokens to resolve under, and the workers the code editor runs on. Ask for " +
+    "this first when working against the library for the first time in a codebase, since a " +
+    "component drawn without them comes out unstyled.";
 
 export const registerGetSetupGuide: RegisterTool = (server, registry) => {
     server.registerTool(
@@ -30,6 +30,26 @@ const guide = (registry: Registry): string => {
         "const App = ({ children }: { children: React.ReactNode }) => (",
         '    <ThemeProvider colorMode="auto">{children}</ThemeProvider>',
         ");",
+    ].join("\n");
+
+    // The one component that asks for a step of its own: Monaco runs its language services on
+    // web workers, each a file the application's bundler has to place, so the application says
+    // how each is started. The paths are the ones the monaco-editor package publishes them under
+    const workers = [
+        `import { configureCodeEditorWorkers } from "${registry.import}";`,
+        'import EditorWorker from "monaco-editor/editor/editor.worker?worker";',
+        'import CssWorker from "monaco-editor/languages/features/css/css.worker?worker";',
+        'import HtmlWorker from "monaco-editor/languages/features/html/html.worker?worker";',
+        'import JsonWorker from "monaco-editor/languages/features/json/json.worker?worker";',
+        'import TsWorker from "monaco-editor/languages/features/typescript/ts.worker?worker";',
+        "",
+        "configureCodeEditorWorkers({",
+        "    editor: () => new EditorWorker(),",
+        "    css: () => new CssWorker(),",
+        "    html: () => new HtmlWorker(),",
+        "    json: () => new JsonWorker(),",
+        "    typescript: () => new TsWorker(),",
+        "});",
     ].join("\n");
 
     return [
@@ -63,6 +83,19 @@ const guide = (registry: Registry): string => {
         "A subtree that is read right to left is wrapped in a `DirectionProvider`, which " +
             "takes `ltr` or `rtl`.",
         fence("tsx", '<DirectionProvider direction="rtl">{children}</DirectionProvider>'),
+
+        "## The code editor",
+        "`CodeEditor` and `CodeDiffEditor` are the Monaco editor, which is fetched the first " +
+            "time one is shown rather than loaded with the page. Its language services run on " +
+            "web workers that only the application's bundler can place, so the application " +
+            "says once, before any editor is shown, how each worker is started. Monaco comes " +
+            "with the package; an application that imports its workers lists `monaco-editor` " +
+            "among its own dependencies as well. With Vite, which bundles a worker from an " +
+            "import ending in `?worker`:",
+        fence("tsx", workers),
+        "Without this the editor still edits and colours every language, and Monaco warns " +
+            "that it is running the editor's own services on the main thread; TypeScript, " +
+            "JavaScript, JSON, CSS and HTML lose their completions and problems.",
 
         "## Writing against the library",
         [

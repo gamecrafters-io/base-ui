@@ -17,8 +17,9 @@ const QUERY =
 // What is worth saying about the library once rather than about each entry in turn
 const PREAMBLE =
     "Everything below is imported by name from the package root. The stylesheet is imported " +
-    "once at the root of the application and a ThemeProvider is wrapped around it, both of " +
-    "which get_setup_guide says how to do.";
+    "once at the root of the application and a ThemeProvider is wrapped around it, and the " +
+    "code editor's workers are configured there too, all of which get_setup_guide says how " +
+    "to do.";
 
 export const registerListComponents: RegisterTool = (server, registry) => {
     server.registerTool(

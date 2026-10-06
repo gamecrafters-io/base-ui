@@ -49,6 +49,16 @@ describe("get_setup_guide", () => {
         expect(said).toContain('import "@gamecrafters/base-ui/main.css";');
         expect(said).toContain("ThemeProvider");
     });
+
+    it("says how the code editor's workers are started", async () => {
+        const said = await call("get_setup_guide");
+        expect(said).toContain("## The code editor");
+        expect(said).toContain(
+            'import { configureCodeEditorWorkers } from "@gamecrafters/base-ui/react";',
+        );
+        expect(said).toContain('"monaco-editor/editor/editor.worker?worker"');
+        expect(said).toContain("typescript: () => new TsWorker()");
+    });
 });
 
 describe("list_components", () => {
