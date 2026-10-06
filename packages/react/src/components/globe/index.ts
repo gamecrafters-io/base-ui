@@ -1,4 +1,4 @@
-import { GlobeOverlay } from "../../lib/react-globe";
+import { GlobeOverlay } from "../../lib/globe";
 import GlobeBase from "./Globe";
 
 // What can be held over a globe, hung off the globe itself, since what it is written inside is
@@ -11,5 +11,5 @@ export const Globe = Object.assign(GlobeBase, {
 
 export { GlobeOverlay };
 export { DEFAULT_GLOBE_MARKER_SIZE, DEFAULT_GLOBE_SPEED } from "./Globe";
-export { useGlobe } from "../../lib/react-globe";
+export { useGlobe } from "../../lib/globe";
 export * from "./Globe.types";

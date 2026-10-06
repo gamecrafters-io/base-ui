@@ -1,5 +1,5 @@
 /**
- * React Globe library
+ * Globe library
  *
  * A dotted globe drawn with WebGL onto a canvas, with markers and arcs standing on it and any
  * element of the page held over them. The globe is drawn once for every state it is told, so a

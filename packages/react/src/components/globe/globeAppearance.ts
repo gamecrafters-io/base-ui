@@ -1,4 +1,4 @@
-import type { GlobeColor, GlobeState } from "../../lib/react-globe";
+import type { GlobeColor, GlobeState } from "../../lib/globe";
 
 // Everything about a globe that the stylesheet settles rather than the caller: what it is
 // painted, how brightly the land is dotted, and how the light falls across it.

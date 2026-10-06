@@ -1,5 +1,5 @@
 /**
- * React OpenLayers library
+ * OpenLayers library
  */
 
 export { Map } from "./Map";

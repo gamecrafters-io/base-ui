@@ -22,7 +22,7 @@ import {
     MapVectorLayer,
     MapView,
     MapWebGLTileLayer,
-} from "../../lib/react-openlayers";
+} from "../../lib/openlayers";
 import MapBase from "./Map";
 
 // Everything a map can be built from, hung off the map itself, since what they are written
@@ -81,7 +81,7 @@ export {
     MapTranslateInteraction,
 };
 export { DEFAULT_MAP_LATITUDE, DEFAULT_MAP_LONGITUDE, DEFAULT_MAP_ZOOM } from "./Map";
-export { useMap, getAddress, getLonLat, DEFAULT_MARKER_COLOR } from "../../lib/react-openlayers";
+export { useMap, getAddress, getLonLat, DEFAULT_MARKER_COLOR } from "../../lib/openlayers";
 export type {
     MapViewProps,
     MapMarkerProps,
@@ -111,5 +111,5 @@ export type {
     MapPointerInteractionProps,
     MapSelectInteractionProps,
     MapTranslateInteractionProps,
-} from "../../lib/react-openlayers";
+} from "../../lib/openlayers";
 export * from "./Map.types";

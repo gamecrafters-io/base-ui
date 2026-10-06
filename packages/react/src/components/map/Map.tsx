@@ -13,7 +13,7 @@ import {
     MapLayersControl,
     MapScaleLineControl,
     MapSearchControl,
-} from "../../lib/react-openlayers";
+} from "../../lib/openlayers";
 import { fixedForwardRef } from "../../utilities/polymorphic";
 import type { MapControl, MapProps } from "./Map.types";
 

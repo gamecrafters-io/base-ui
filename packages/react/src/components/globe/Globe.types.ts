@@ -2,9 +2,9 @@ import type * as React from "react";
 import type {
     GlobeArc as GlobeSurfaceArc,
     GlobeMarker as GlobeSurfaceMarker,
-} from "../../lib/react-globe";
+} from "../../lib/globe";
 
-export type { GlobeColor, GlobeLocation, GlobeOverlayProps } from "../../lib/react-globe";
+export type { GlobeColor, GlobeLocation, GlobeOverlayProps } from "../../lib/globe";
 
 // A dot standing somewhere on the globe. It is the surface's own marker but for the size, which
 // the globe fills in from `markerSize` wherever a marker does not name one, so a caller placing a

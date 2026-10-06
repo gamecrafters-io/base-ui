@@ -1,11 +1,11 @@
 import * as React from "react";
 import { useMergedRefs } from "../../hooks/useMergedRefs";
 import { classNames } from "../../lib/classnames";
-import { Globe as GlobeSurface } from "../../lib/react-globe";
+import { Globe as GlobeSurface } from "../../lib/globe";
 import { fixedForwardRef } from "../../utilities/polymorphic";
 import { readGlobeAppearance } from "./globeAppearance";
 import { useReducedMotion } from "./useReducedMotion";
-import type { GlobeState } from "../../lib/react-globe";
+import type { GlobeState } from "../../lib/globe";
 import type { GlobeArc, GlobeMarker, GlobeProps } from "./Globe.types";
 
 const classes = {
