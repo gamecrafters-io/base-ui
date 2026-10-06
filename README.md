@@ -128,6 +128,32 @@ import { DirectionProvider } from '@gamecrafters/base-ui/react';
 <DirectionProvider direction="rtl">{children}</DirectionProvider>;
 ```
 
+The code editor is the one component that asks for a step of its own. It is the Monaco editor,
+whose language services run on web workers that only the application's bundler can place, so the
+application says once, before any editor is shown, how each is started. With Vite, which bundles
+a worker from an import ending in `?worker`:
+
+```jsx
+import { configureCodeEditorWorkers } from '@gamecrafters/base-ui/react';
+import EditorWorker from 'monaco-editor/editor/editor.worker?worker';
+import CssWorker from 'monaco-editor/languages/features/css/css.worker?worker';
+import HtmlWorker from 'monaco-editor/languages/features/html/html.worker?worker';
+import JsonWorker from 'monaco-editor/languages/features/json/json.worker?worker';
+import TsWorker from 'monaco-editor/languages/features/typescript/ts.worker?worker';
+
+configureCodeEditorWorkers({
+  editor: () => new EditorWorker(),
+  css: () => new CssWorker(),
+  html: () => new HtmlWorker(),
+  json: () => new JsonWorker(),
+  typescript: () => new TsWorker(),
+});
+```
+
+Without it the editor still edits and colours every language, and Monaco warns that it is running
+the editor's own services on the main thread. An application that imports the workers lists
+`monaco-editor` among its own dependencies as well.
+
 The scripts are run from the root and reach the packages through Turbo, which caches a task
 against its inputs so an unchanged package is not built or tested twice:
 

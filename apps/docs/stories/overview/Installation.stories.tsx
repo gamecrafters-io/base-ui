@@ -36,6 +36,21 @@ const App = ({ children }: { children: ReactNode }) => (
     <ThemeProvider colorMode="auto">{children}</ThemeProvider>
 );`;
 
+const workers = `import { configureCodeEditorWorkers } from "@gamecrafters/base-ui/react";
+import EditorWorker from "monaco-editor/editor/editor.worker?worker";
+import CssWorker from "monaco-editor/languages/features/css/css.worker?worker";
+import HtmlWorker from "monaco-editor/languages/features/html/html.worker?worker";
+import JsonWorker from "monaco-editor/languages/features/json/json.worker?worker";
+import TsWorker from "monaco-editor/languages/features/typescript/ts.worker?worker";
+
+configureCodeEditorWorkers({
+    editor: () => new EditorWorker(),
+    css: () => new CssWorker(),
+    html: () => new HtmlWorker(),
+    json: () => new JsonWorker(),
+    typescript: () => new TsWorker(),
+});`;
+
 const clone = `git clone https://github.com/gamecrafters-io/base-ui.git
 cd base-ui
 npm install
@@ -150,6 +165,35 @@ export const TheStylesheet: StoryFn = () => (
                 <CodeBlock.Code>{themed}</CodeBlock.Code>
             </CodeBlock.Content>
         </CodeBlock>
+    </Stack>
+);
+
+// The Code Editor, which is the one component that asks for a step of its own: the workers
+// Monaco runs its language services on are bundled by the application rather than by the library
+export const TheCodeEditor: StoryFn = () => (
+    <Stack gap="normal">
+        <Heading size="medium">The code editor</Heading>
+        <Text as="p">
+            <Code>CodeEditor</Code> is the Monaco editor, fetched the first time one is shown rather
+            than loaded with the page. Its language services run on web workers that only the
+            application&apos;s bundler can place, so the application says once, before any editor is
+            shown, how each is started. Vite bundles a worker from an import ending in{" "}
+            <Code>?worker</Code>; an application that imports the workers lists{" "}
+            <Code>monaco-editor</Code> among its own dependencies as well.
+        </Text>
+        <CodeBlock language="tsx">
+            <CodeBlock.Header>
+                <CodeBlock.Title>main.tsx</CodeBlock.Title>
+            </CodeBlock.Header>
+            <CodeBlock.Content>
+                <CodeBlock.Code>{workers}</CodeBlock.Code>
+            </CodeBlock.Content>
+        </CodeBlock>
+        <Text as="p">
+            Without it the editor still edits and colours every language, and Monaco says that it is
+            running the editor&apos;s own services on the main thread; TypeScript, JSON, CSS and
+            HTML lose their completions and problems.
+        </Text>
     </Stack>
 );
 

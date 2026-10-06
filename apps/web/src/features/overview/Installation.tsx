@@ -41,6 +41,25 @@ const SignIn = () => (
     </Stack>
 );`;
 
+// The one component that asks for a step of its own. The code editor is Monaco, which runs its
+// language services on web workers that only the application's bundler can place, so the
+// application says once how each is started. Vite bundles a worker from an import ending in
+// `?worker`, and the paths are the ones the monaco-editor package publishes the workers under
+const workers = `import { configureCodeEditorWorkers } from "@gamecrafters/base-ui/react";
+import EditorWorker from "monaco-editor/editor/editor.worker?worker";
+import CssWorker from "monaco-editor/languages/features/css/css.worker?worker";
+import HtmlWorker from "monaco-editor/languages/features/html/html.worker?worker";
+import JsonWorker from "monaco-editor/languages/features/json/json.worker?worker";
+import TsWorker from "monaco-editor/languages/features/typescript/ts.worker?worker";
+
+configureCodeEditorWorkers({
+    editor: () => new EditorWorker(),
+    css: () => new CssWorker(),
+    html: () => new HtmlWorker(),
+    json: () => new JsonWorker(),
+    typescript: () => new TsWorker(),
+});`;
+
 // What has to be done before any of the library can be used, in the order it is done in. It is
 // three steps rather than one because the stylesheet and the providers are settled at the root and
 // nowhere else, and a component reached for before either of them is drawn by nothing
@@ -117,6 +136,32 @@ const Installation = () => (
                     <CodeBlock.Code>{usage}</CodeBlock.Code>
                 </CodeBlock.Content>
             </CodeBlock>
+        </Stack>
+        <Stack gap="condensed" className={classes.listing}>
+            <Heading as="h2" size="small">
+                Set the code editor up
+            </Heading>
+            <Text as="p" size="small" className={classes.prose}>
+                One component asks for a step of its own. <Code>CodeEditor</Code> is the Monaco
+                editor, fetched the first time one is shown rather than loaded with the page, and
+                its language services run on web workers that only the application&apos;s bundler
+                can place. The application says once, before any editor is shown, how each is
+                started; an application that imports the workers lists <Code>monaco-editor</Code>{" "}
+                among its own dependencies as well.
+            </Text>
+            <CodeBlock language="tsx">
+                <CodeBlock.Header>
+                    <CodeBlock.Title>main.tsx</CodeBlock.Title>
+                </CodeBlock.Header>
+                <CodeBlock.Content>
+                    <CodeBlock.Code>{workers}</CodeBlock.Code>
+                </CodeBlock.Content>
+            </CodeBlock>
+            <Text as="p" size="small" className={classes.prose}>
+                Without it the editor still edits and colours every language, and Monaco says that
+                it is running the editor&apos;s own services on the main thread; TypeScript, JSON,
+                CSS and HTML lose their completions and problems.
+            </Text>
         </Stack>
     </Stack>
 );
